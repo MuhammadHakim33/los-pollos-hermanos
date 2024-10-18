@@ -28,3 +28,6 @@
     ```sh
     php artisan serve
     ```
+    ```sh
+    npm run dev
+    ```
