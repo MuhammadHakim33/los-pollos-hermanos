@@ -10,14 +10,21 @@
     ```sh
     composer install
     ```
-3. Create new database in your local
-4. Rename the `.env.example` file to `.env`
-5. Set the mysql db connection in the .env file
-6. Run migration
+3. Install breeze
+    ```sh
+    php artisan breeze:install
+    ```
+     ```sh
+    npm install
+    ```
+4. Create new database in your local
+5. Rename the `.env.example` file to `.env`
+6. Set the mysql db connection in the .env file
+7. Run migration
     ```sh
     php artisan migrate
     ```
-7. Run the app
+8. Run the app
     ```sh
     php artisan serve
     ```
