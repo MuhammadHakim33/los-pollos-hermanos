@@ -18,7 +18,7 @@
     npm install
     ```
 4. Create new database in your local
-5. Rename the `.env.example` file to `.env`
+5. Duplicate the `.env.example` file then rename it to `.env`
 6. Set the mysql db connection in the .env file
 7. Run migration
     ```sh
