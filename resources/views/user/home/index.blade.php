@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Delivery</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100 font-sans">
@@ -15,12 +18,12 @@
                 <img alt="GrabFood Logo" class="h-10" src="https://storage.googleapis.com/a1aa/image/NN1CHnKtSlYvN51XTHLoMARLXbwgGqCSTKUrZw7FDcH1S75E.jpg"/>
             </div>
             <div class="flex items-center gap-x-4">
-                <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent disabled:pointer-events-none hover:bg-gray-100 focus:bg-gray-100">
+                <a href="{{ route('login') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent disabled:pointer-events-none hover:bg-gray-100 focus:bg-gray-100">
                     Log in
-                </button>
-                <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-gray-200 hover:bg-gray-300 focus:outline-none focus:bg-gray-300 disabled:pointer-events-none">
+                </a>
+                <a href="{{ route('register') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-gray-200 hover:bg-gray-300 focus:outline-none focus:bg-gray-300 disabled:pointer-events-none">
                     Register
-                </button>
+                </a>
                 <button type="button" class="flex shrink-0 justify-center items-center gap-2 size-[38px] text-sm font-medium rounded-lg border hover:bg-gray-100 focus:bg-gray-100" aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-cart" data-hs-overlay="#modal-cart">
                     <i class="ri-shopping-basket-line ri-lg"></i>
                 </button>
@@ -86,8 +89,8 @@
     <section class="bg-white py-8 rounded shadow-sm">
         <div class="container mx-auto px-4 flex flex-wrap justify-between gap-4">
             <div class="lg:max-w-md">
-                <h1 class="text-4xl font-bold">Nasi Goreng Mas Aris</h1>
-                <p class="text-gray-600 mt-2">Bakmi, Asli Indonesia, Aneka Nasi</p>
+                <h1 class="text-4xl font-bold">Rumah Makan Selera Panca</h1>
+                <p class="text-gray-600 mt-2">Asli Indonesia, Aneka Nasi</p>
                 <div class="flex mt-2 text-gray-600">
                     <i class="ri-map-pin-2-fill mr-2"></i>
                     <p>Jl. IKPN Bintaro, RT.4/RW.10, Bintaro, Kec. Pesanggrahan Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta</p>

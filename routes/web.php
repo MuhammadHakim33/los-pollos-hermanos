@@ -2,56 +2,44 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {return view('user.home.index');});
+Route::get('/', function () {
+    return view('user.home.index');
+});
+
+Route::get('/index', function () {
+    return view('user.home.index'); // Sesuaikan dengan tampilan yang diinginkan
+})->name('index');
+
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
-// Routes untuk login
-Route::get('/login', function () {
-    return view('user.auth.login.login');
-})->name('login');
+// Rute login
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/login/verifikasi', function () {
-    return view('user.auth.login.verifikasi');
-})->name('login.verifikasi');
+// // Rute logout
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Routes untuk register
-Route::get('/register', function () {
-    return view('user.auth.register.register');
-})->name('register');
+// Rute register
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/register/biodata-email', function () {
-    return view('user.auth.register.biodata_email');
-})->name('register.biodata.email');
-
-Route::get('/register/biodata-nama', function () {
-    return view('user.auth.register.biodata_nama');
-})->name('register.biodata.nama');
-
-Route::get('/register/final', function () {
-    return view('user.auth.register.final');
-})->name('register.final');
-
-Route::get('/register/verifikasi', function () {
-    return view('user.auth.register.verifikasi');
-})->name('register.verifikasi');
-
-// Route untuk halaman login khusus
-Route::get('/masuk', function () {
-    return view('user.auth.register.masuk');
-})->name('masuk');
+// Rute reset PW
+Route::get('/forgot-password', [AuthController::class, 'showResetPasswordForm'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
 
 require __DIR__.'/auth.php';
