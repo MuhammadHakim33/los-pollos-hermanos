@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Address;
 use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
-
     //LOGIN_METHOD
     public function showLoginForm()
     {
@@ -20,10 +20,10 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+        
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/index');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
@@ -44,8 +44,8 @@ class AuthController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'no_telp' => 'required|string|max:15',
-            'email_regis' => 'required|string|email|max:255|unique:users,email',
-            'password_regis' => 'required|string|min:8|confirmed',
+            'email_regis' => 'required|string|email:dns|max:255|unique:users,email',
+            'password_regis' => 'required|string|min:8',
             'alamat' => 'required|string|max:255',
             'kecamatan' => 'required|string|max:255',
             'kelurahan' => 'required|string|max:255',
@@ -54,10 +54,15 @@ class AuthController extends Controller
         // Buat pengguna baru di database
         $user = User::create([
             'name' => $request->nama,
-            'no_telp' => $request->no_telp,
             'email' => $request->email_regis,
             'password' => Hash::make($request->password_regis),
-            'alamat' => $request->alamat,
+            'phone' => $request->no_telp,
+            'role' => 'user',
+        ]);
+
+        $user_address = Address::create([
+            'id_user' => $user->id,
+            'detail' => $request->alamat,
             'kecamatan' => $request->kecamatan,
             'kelurahan' => $request->kelurahan,
         ]);
@@ -66,26 +71,33 @@ class AuthController extends Controller
         Auth::login($user);
 
         // Redirect ke dashboard atau halaman lainnya
-        return redirect()->intended('/index');
+        return redirect('/');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 
     //Resetpassword
-    public function showResetPasswordForm()
-    {
-        return view('user.auth.resetPW.reset'); 
-    }
+    // public function showResetPasswordForm()
+    // {
+    //     return view('user.auth.resetPW.reset'); 
+    // }
 
-    public function sendResetLink(Request $request)
-    {
-        $request->validate(['email' => 'required|email']);
+    // public function sendResetLink(Request $request)
+    // {
+    //     $request->validate(['email' => 'required|email']);
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+    //     $status = Password::sendResetLink(
+    //         $request->only('email')
+    //     );
 
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
-    }
-
+    //     return $status === Password::RESET_LINK_SENT
+    //         ? back()->with(['status' => __($status)])
+    //         : back()->withErrors(['email' => __($status)]);
+    // }
 }

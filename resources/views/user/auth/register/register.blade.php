@@ -34,7 +34,8 @@
       <h2 class="text-xl font-semibold mb-2">Masukkan Biodata</h2>
       <p class="text-gray-600 mb-4">Buat daftar kalau kamu baru di Rumah Makan Selera Panca.</p>
 
-      <form method="POST">
+      <form method="POST" action="{{ route('register') }}">
+        @csrf
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
            <!-- Nama -->

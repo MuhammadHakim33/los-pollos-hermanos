@@ -1,15 +1,56 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+
+Route::controller(AuthController::class)->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', 'showLoginForm')->name('login');
+        Route::post('/login', 'login');
+        Route::get('/register', 'showRegistrationForm')->name('register');
+        Route::post('/register', 'register');
+    });
+    Route::middleware('auth')->group(function () {
+        Route::post('/logout', 'logout')->name('logout');
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Rute reset PW
+// Route::get('/forgot-password', [AuthController::class, 'showResetPasswordForm'])->name('password.request');
+// Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
+
+
+
+
+// BAWAAN BREEZE
+// use App\Http\Controllers\Auth\AuthenticatedSessionController;
+// use App\Http\Controllers\Auth\ConfirmablePasswordController;
+// use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+// use App\Http\Controllers\Auth\EmailVerificationPromptController;
+// use App\Http\Controllers\Auth\NewPasswordController;
+// use App\Http\Controllers\Auth\PasswordController;
+// use App\Http\Controllers\Auth\PasswordResetLinkController;
+// use App\Http\Controllers\Auth\RegisteredUserController;
+// use App\Http\Controllers\Auth\VerifyEmailController;
 
 // Route::middleware('guest')->group(function () {
 //     Route::get('register', [RegisteredUserController::class, 'create'])

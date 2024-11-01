@@ -18,12 +18,29 @@
                 <img alt="GrabFood Logo" class="h-10" src="https://storage.googleapis.com/a1aa/image/NN1CHnKtSlYvN51XTHLoMARLXbwgGqCSTKUrZw7FDcH1S75E.jpg"/>
             </div>
             <div class="flex items-center gap-x-4">
-                <a href="{{ route('login') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent disabled:pointer-events-none hover:bg-gray-100 focus:bg-gray-100">
-                    Log in
-                </a>
-                <a href="{{ route('register') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-gray-200 hover:bg-gray-300 focus:outline-none focus:bg-gray-300 disabled:pointer-events-none">
-                    Register
-                </a>
+                @auth
+                <div class="hs-dropdown relative inline-flex">
+
+                    <button id="hs-dropdown-unstyled" type="button" class="text-sm py-2 px-3 hs-dropdown-toggle inline-flex justify-center items-center gap-x-2 border border-gray-200 text-gray-500 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none" aria-expanded="false" aria-label="Menu">
+                    {{Auth::user()->name}}
+                    </button>
+
+                    <div class="py-2 px-3 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 w-56 hidden hs-dropdown-open:flex flex-col z-10 mt-2 min-w-60 border border-gray-200 bg-white divide-y divide-gray-200" role="menu" aria-labelledby="hs-dropdown-unstyled">
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium text-gray-600 hover:text-blue-600" href="#">Logout</button>
+                        </form>
+                    </div>
+                </div> 
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent disabled:pointer-events-none hover:bg-gray-100 focus:bg-gray-100">
+                        Log in
+                    </a>
+                    <a href="{{ route('register') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-gray-200 hover:bg-gray-300 focus:outline-none focus:bg-gray-300 disabled:pointer-events-none">
+                        Register
+                    </a>
+                @endguest
                 <button type="button" class="flex shrink-0 justify-center items-center gap-2 size-[38px] text-sm font-medium rounded-lg border hover:bg-gray-100 focus:bg-gray-100" aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-cart" data-hs-overlay="#modal-cart">
                     <i class="ri-shopping-basket-line ri-lg"></i>
                 </button>

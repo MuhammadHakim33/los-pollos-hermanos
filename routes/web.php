@@ -8,9 +8,22 @@ Route::get('/', function () {
     return view('user.home.index');
 });
 
-Route::get('/index', function () {
-    return view('user.home.index'); // Sesuaikan dengan tampilan yang diinginkan
-})->name('index');
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::get('/index', function () {
+//     return view('user.home.index'); // Sesuaikan dengan tampilan yang diinginkan
+// })->name('index');
 
 
 // Route::get('/', function () {
@@ -27,19 +40,6 @@ Route::get('/index', function () {
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-// Rute login
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
 
-// // Rute logout
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Rute register
-Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
-
-// Rute reset PW
-Route::get('/forgot-password', [AuthController::class, 'showResetPasswordForm'])->name('password.request');
-Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
 
 require __DIR__.'/auth.php';

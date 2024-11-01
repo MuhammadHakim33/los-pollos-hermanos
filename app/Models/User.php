@@ -21,10 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'no_telp',      // Kolom baru
-        'alamat',       // Kolom baru
-        'kecamatan',    // Kolom baru
-        'kelurahan',    // Kolom baru
+        'phone',
     ];
 
     /**
