@@ -19,6 +19,16 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
+        ], [
+            'email.required' => 'Email Wajib Diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'password.required' => 'Password Wajib Diisi.',
+            'password.min' => 'Password Mininmal 8 karakter.',
+        ]);
+
         $credentials = $request->only('email', 'password');
         
         if (Auth::attempt($credentials)) {
@@ -49,6 +59,17 @@ class AuthController extends Controller
             'alamat' => 'required|string|max:255',
             'kecamatan' => 'required|string|max:255',
             'kelurahan' => 'required|string|max:255',
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'no_telp.required' => 'Nomor telepon wajib diisi.',
+            'email_regis.required' => 'Email wajib diisi.',
+            'email_regis.email' => 'Format email tidak valid.',
+            'email_regis.unique' => 'Email sudah terdaftar.',
+            'password_regis.required' => 'Password wajib diisi.',
+            'password_regis.min' => 'Password harus minimal 8 karakter.',
+            'alamat.required' => 'Alamat wajib diisi.',
+            'kecamatan.required' => 'Kecamatan wajib diisi.',
+            'kelurahan.required' => 'Kelurahan wajib diisi.',
         ]);
 
         // Buat pengguna baru di database
