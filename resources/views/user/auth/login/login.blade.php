@@ -49,6 +49,11 @@
             peer-[:not(:placeholder-shown)]:translate-x-0.5
             peer-[:not(:placeholder-shown)]:-translate-y-1.5
             peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500 dark:text-neutral-500">Email</label>
+
+          <!-- Pesan Error email -->
+          @error('email')
+              <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+          @enderror
         </div>
         
         <!-- pasword -->
@@ -69,7 +74,20 @@
             peer-[:not(:placeholder-shown)]:translate-x-0.5
             peer-[:not(:placeholder-shown)]:-translate-y-1.5
             peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500 dark:text-neutral-500">Password</label>
+
+            <!-- Pesan error password -->
+          @error('password')
+                  <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+          @enderror
         </div>
+
+
+        <!-- error umum -->
+        @if ($errors->has('email'))
+                <div class="text-red-500 text-sm mt-5 mb-4">
+                    Email atau password yang dimasukkan salah.
+                </div>
+        @endif
 
         <button type="submit" class="mt-6 py-3 w-full inline-flex items-center justify-center text-sm font-medium rounded-lg bg-green-300 text-gray-500 mb-5">
             Lanjut
