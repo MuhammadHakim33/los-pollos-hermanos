@@ -10,6 +10,14 @@ use App\Models\Menu;
 
 class CartController extends Controller
 {
+    private $cart = '';
+    private $itemableclass = Menu::class;
+
+    public function __construct()
+    {
+        $this->cart = Cart::query()->firstOrCreate(['user_id' => auth()->user()->id]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -60,15 +68,13 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $cart = Cart::query()->firstOrCreate(['user_id' => auth()->user()->id]);
-
         $cartItem = new CartItem([
             'itemable_id' => $request->menu_id,
-            'itemable_type' => Menu::class,
+            'itemable_type' => $this->itemableclass,
             'quantity' => 1,
         ]);
 
-        $cart->items()->save($cartItem);
+        $this->cart->items()->save($cartItem);
 
         return back();
     }
@@ -100,8 +106,15 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
-        //
+        // $cartItem = new CartItem([
+        //     'itemable_id' => 1,
+        //     'itemable_type' => Menu::class,
+        // ]);
+        $cart = CartItem::find(5);
+        dd($cart->getKey());
+
+        $this->cart->removeItem($cart);
     }
 }

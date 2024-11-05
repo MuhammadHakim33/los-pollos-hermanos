@@ -9,6 +9,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::post('/cart', [CartController::class, 'store']);
+    Route::get('/cart/delete', [CartController::class, 'destroy']);
 });
 
 
