@@ -4,33 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Binafy\LaravelCart\Models\CartItem;
+use \Binafy\LaravelCart\Models\Cart;
 use Illuminate\Support\Facades\DB;
 use App\Models\Menu;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $menus = Menu::all();
         // $carts = CartItem::select('cart_id', 'itemable_id', 'itemable_type', DB::raw('SUM(quantity) as total_quantity'))
         //         ->groupBy('itemable_id')
         //         ->groupBy('itemable_type')
         //         ->groupBy('cart_id')
         //         ->get();
-        $carts = CartItem::select('cart_id', 'itemable_id', 'itemable_type', DB::raw('SUM(quantity) as total_quantity'))
-                ->groupBy('itemable_id')
-                ->groupBy('itemable_type')
-                ->groupBy('cart_id')
-                ->get();
+        // $carts = CartItem::select('cart_id', 'itemable_id', 'itemable_type', DB::raw('SUM(quantity) as total_quantity'))
+        //         ->groupBy('itemable_id')
+        //         ->groupBy('itemable_type')
+        //         ->groupBy('cart_id')
+        //         ->get();
         // $carts = CartItem::all();
         // $total = $carts->itemable->sum('price');
+        // $carts = Cart::with('items')->where('user_id', auth()->user()->id)->get();
+
+        $menus = Menu::all();
+        $carts = [];
+        $total_price = 0;
+        
+        if (auth()->check()) {
+            $carts = Cart::with('items.itemable')->where('user_id', auth()->user()->id)->get();
+            $total_price = $carts[0]->calculatedPriceByQuantity();
+        }
 
         return view('user.home.index', [
             'menus' => $menus,
-            'carts' => $carts
+            'carts' => $carts,
+            'total_price' => $total_price,
         ]);
     }
 

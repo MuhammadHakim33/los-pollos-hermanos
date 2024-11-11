@@ -9,7 +9,9 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::post('/cart', [CartController::class, 'store']);
-    Route::get('/cart/delete', [CartController::class, 'destroy']);
+    Route::delete('/cart/{id}', [CartController::class, 'destroy']);
+    Route::put('/cart/{id}/decrease', [CartController::class, 'decrease']);
+    Route::put('/cart/{id}/increase', [CartController::class, 'increase']);
 });
 
 

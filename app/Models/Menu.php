@@ -10,9 +10,9 @@ class Menu extends Model implements Cartable
 {
     protected $table = 'menu';
 
-    public function getPrice(): float
+    public function getPrice(): int
     {
-        //
+        return $this->attributes['price'];
     }
 
     public function carts()

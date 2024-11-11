@@ -23,36 +23,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        // $menu = Menu::find(1);
-
-        // $cart = Cart::query()->firstOrCreateWithStoreItems(
-        //     item: $menu,
-        //     quantity: 1,
-        //     userId: Auth::user()->id
-        // );
-
-        // $cartItem = new CartItem([
-        //     'itemable_id' => 1,
-        //     'itemable_type' => 'App\Models\Menu',
-        //     'quantity' => 1,
-        // ]);
-        
-        // $cartItem->itemable()->first();
-
-        // dd($cartItem);
-
-        // dd(Menu::all());
-        // foreach (Menu::all() as $menu) {
-        //     echo $menu->carts;
-        // }
-
-        // $cart = [];
-
-        // foreach (CartItem::all() as $item) {
-        //     $cart = $item->itemable;
-        // }
-
-        // return $cart;
+        // 
     }
 
     /**
@@ -63,11 +34,19 @@ class CartController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        $cartitem = CartItem::where('cart_id', $this->cart->id)
+                            ->where('itemable_id', $request->menu_id)
+                            ->first();
+
+        if($cartitem) {
+            $menu = Menu::find($cartitem->itemable_id);
+            $this->cart->increaseQuantity($menu, 1);
+
+            return back();
+        }
+        
         $cartItem = new CartItem([
             'itemable_id' => $request->menu_id,
             'itemable_type' => $this->itemableclass,
@@ -100,21 +79,32 @@ class CartController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        echo $request->menu_id; 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy()
+    public function decrease(string $id)
     {
-        // $cartItem = new CartItem([
-        //     'itemable_id' => 1,
-        //     'itemable_type' => Menu::class,
-        // ]);
-        $cart = CartItem::find(5);
-        dd($cart->getKey());
+        $cart = CartItem::find($id);
+        
+        if($cart->quantity == 1) {
+            return back();
+        }
 
+        $this->cart->decreaseQuantity($cart, 1);
+        return back();
+    }
+
+    public function increase(string $id)
+    {
+        $cart = CartItem::find($id);
+        $this->cart->increaseQuantity($cart, 1);
+        return back();
+    }
+
+    public function destroy(string $id)
+    {
+        $cart = CartItem::find($id);
         $this->cart->removeItem($cart);
+        return back();
     }
 }
