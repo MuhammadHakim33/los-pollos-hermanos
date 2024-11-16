@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 255);
             $table->text('desc')->nullable();
             $table->integer('price');
-            $table->string('path_img', 255)->nullable();
+            $table->text('path_img')->nullable();
             $table->enum('status', ['available', 'empty'])->default('available');
             $table->timestamps();
         });
