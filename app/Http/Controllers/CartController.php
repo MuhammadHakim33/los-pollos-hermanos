@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use \Binafy\LaravelCart\Models\Cart;
-use \Binafy\LaravelCart\Models\CartItem;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Menu;
 
 class CartController extends Controller
 {
-    private $cart = '';
     private $itemableclass = Menu::class;
+    private $cart;
 
     public function __construct()
     {
-        $this->cart = Cart::query()->firstOrCreate(['user_id' => auth()->user()->id]);
+        $this->cart = Cart::instance(auth()->user()->email);
     }
 
     /**
@@ -36,24 +35,13 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        $cartitem = CartItem::where('cart_id', $this->cart->id)
-                            ->where('itemable_id', $request->menu_id)
-                            ->first();
-
-        if($cartitem) {
-            $menu = Menu::find($cartitem->itemable_id);
-            $this->cart->increaseQuantity($menu, 1);
-
-            return back();
-        }
-        
-        $cartItem = new CartItem([
-            'itemable_id' => $request->menu_id,
-            'itemable_type' => $this->itemableclass,
-            'quantity' => 1,
-        ]);
-
-        $this->cart->items()->save($cartItem);
+        $this->cart->add([
+            'id' => $request->menu_id, 
+            'name' => $request->menu_name, 
+            'qty' => 1,
+            'price' => $request->menu_price,
+            'weight' => 0,
+        ])->associate('App\Models\Menu');
 
         return back();
     }
@@ -79,32 +67,26 @@ class CartController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        echo $request->menu_id; 
+        // echo $request->menu_id; 
     }
 
-    public function decrease(string $id)
+    public function decrease(Request $request, string $id)
     {
-        $cart = CartItem::find($id);
-        
-        if($cart->quantity == 1) {
-            return back();
-        }
-
-        $this->cart->decreaseQuantity($cart, 1);
+        if ($request->qty > 1) {
+            $this->cart->update($id, $request->qty - 1);
+        } 
         return back();
     }
 
-    public function increase(string $id)
+    public function increase(Request $request, string $id)
     {
-        $cart = CartItem::find($id);
-        $this->cart->increaseQuantity($cart, 1);
+        $this->cart->update($id, $request->qty + 1);
         return back();
     }
 
     public function destroy(string $id)
     {
-        $cart = CartItem::find($id);
-        $this->cart->removeItem($cart);
+        $this->cart->remove($id);
         return back();
     }
 }

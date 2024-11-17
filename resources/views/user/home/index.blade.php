@@ -37,6 +37,8 @@
         <form action="/cart" method="post">
             @csrf
             <input type="text" name="menu_id" value="{{ $menu->id }}" readonly hidden>
+            <input type="text" name="menu_name" value="{{ $menu->name }}" readonly hidden>
+            <input type="text" name="menu_price" value="{{ $menu->price }}" readonly hidden>
             <button type="submit" class="bg-white p-3 rounded shadow flex gap-4 border border-transparent hover:border hover:border-blue-500 hover:bg-blue-50/20 relative">
                 <img class="w-28 aspect-square object-cover rounded" src="{{ $menu->path_img }}"/>
                 <div class="text-left">

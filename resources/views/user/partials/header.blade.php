@@ -44,13 +44,13 @@
             <div class="p-4 overflow-y-auto">
                 @auth
                 <ul class="flex flex-col divide-y divide-gray-200">
-                    @if($carts->count() > 0)
-                        @foreach ($carts[0]->items as $item)
+                    @if($carts->count())
+                        @foreach ($carts as $item)
                             <li class="inline-flex items-center gap-x-2 py-3 text-sm text-gray-800">
                                 <div class="inline-block bg-white mr-1" data-hs-input-number='{"min":1}'>
                                     <div class="flex items-center gap-x-1.5">
                                         <!-- DELETE -->
-                                        <form action="/cart/{{ $item->id }}" method="post">
+                                        <form action="/cart/{{ $item->rowId }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="size-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
@@ -58,27 +58,29 @@
                                             </button>
                                         </form>
                                         <!-- DECREASE -->
-                                        <form action="/cart/{{ $item->id }}/decrease" method="post">
+                                        <form action="/cart/{{ $item->rowId }}/decrease" method="post">
                                             @method('PUT')
                                             @csrf
-                                            <button type="submit" class="size-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" @disabled($item->quantity == 1)>
+                                            <input type="text" name="qty" value="{{ $item->qty }}" readonly hidden>
+                                            <button type="submit" class="size-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" @disabled($item->qty == 1)>
                                                 <i class="ri-subtract-fill ri-lg"></i>
                                             </button>
                                         </form>
                                         <!-- QUANTITY -->
-                                        <input class="p-0 w-4 bg-transparent border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" style="-moz-appearance: textfield;" type="number" value="{{ $item->quantity }}">
+                                        <input class="p-0 w-4 bg-transparent border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" style="-moz-appearance: textfield;" type="number" value="{{ $item->qty }}">
                                         <!-- INCREASE -->
-                                        <form action="/cart/{{ $item->id }}/increase" method="post">
+                                        <form action="/cart/{{ $item->rowId }}/increase" method="post">
                                             @method('PUT')
                                             @csrf
+                                            <input type="text" name="qty" value="{{ $item->qty }}" readonly hidden>
                                             <button type="submit" class="size-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                                                 <i class="ri-add-fill ri-lg"></i>
                                             </button>
                                         </form>
                                     </div>
                                 </div>
-                                <p>{{ $item->itemable->name }}</p>
-                                <p class="ml-auto">{{ Number::format($item->itemable->price * $item->quantity ) }}</p>
+                                <p>{{ $item->name }}</p>
+                                <p class="ml-auto">{{ Number::format($item->total) }}</p>
                             </li>
                         @endforeach
                     @else
@@ -91,11 +93,11 @@
                 @endguest
             </div>
             @auth
-                @if($carts->count() > 0)
+                @if($carts->count())
                     <div class="bg-gray-50 py-3 px-4 border-t">
                         <div class="flex justify-between mb-4">
                             <h3 class="font-medium">Total Harga</h3>
-                            <p class="font-medium">Rp {{ Number::format($total_price ) }}</p>
+                            <p class="font-medium">Rp {{ $total_price }}</p>
                         </div>
                         <a class="block py-2 px-3 w-full text-sm text-center font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="#">Pesan</a>
                     </div>

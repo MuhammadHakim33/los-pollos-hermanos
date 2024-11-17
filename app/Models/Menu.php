@@ -3,20 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Binafy\LaravelCart\Cartable;
-use \Binafy\LaravelCart\Models\CartItem;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 
-class Menu extends Model implements Cartable
+class Menu extends Model implements Buyable
 {
     protected $table = 'menu';
 
-    public function getPrice(): int
-    {
-        return $this->attributes['price'];
+    public function getBuyableIdentifier($options = null) {
+        return $this->id;
     }
 
-    public function carts()
-    {
-        return $this->morphMany(CartItem::class, 'itemable');
+    public function getBuyableDescription($options = null) {
+        return $this->name;
+    }
+
+    public function getBuyablePrice($options = null) {
+        return $this->price;
+    }
+
+    public function getBuyableWeight($options = null) {
+        return 0;
     }
 }
