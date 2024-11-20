@@ -97,9 +97,9 @@
                     <div class="bg-gray-50 py-3 px-4 border-t">
                         <div class="flex justify-between mb-4">
                             <h3 class="font-medium">Total Harga</h3>
-                            <p class="font-medium">Rp {{ $total_price }}</p>
+                            <p class="font-medium">Rp{{ $total_price }}</p>
                         </div>
-                        <a class="block py-2 px-3 w-full text-sm text-center font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="#">Pesan</a>
+                        <a class="block py-2 px-3 w-full text-sm text-center font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="/checkout">Pesan</a>
                     </div>
                 @endif
             @endauth

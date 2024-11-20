@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -12,6 +13,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{id}', [CartController::class, 'destroy']);
     Route::put('/cart/{id}/decrease', [CartController::class, 'decrease']);
     Route::put('/cart/{id}/increase', [CartController::class, 'increase']);
+
+    Route::get('/checkout', [OrderController::class, 'checkout']);
 });
 
 

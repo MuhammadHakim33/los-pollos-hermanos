@@ -44,7 +44,7 @@
                 <div class="text-left">
                     <h3 class="mt-2 font-bold capitalize">{{ $menu->name }}</h3>
                     <p class="text-gray-600">{{ $menu->desc }}</p>
-                    <p class="mt-2 font-medium">{{ Number::currency($menu->price, in: 'IDR') }}</p>
+                    <p class="mt-2 font-medium">Rp{{ number_format($menu->price) }}</p>
                 </div>
                 <div class="bg-blue-500 text-white rounded-full w-9 h-9 absolute right-3 bottom-3 flex justify-center items-center">
                     <i class="ri-add-fill ri-xl"></i>
