@@ -1,4 +1,17 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="desc/Logo RM. Selera Panca.png" width="400" alt="Logo Rumah Makan Selera Panca"></a></p>
+
+---
+## Anggota Kelompok 8
+
+| 🏷️ **Nama**               | 🎓 **NIM**      |
+|---------------------------|----------------|
+| Muhammad Hakim           | 4522210092     |
+| Muhammad Rachel Fathan   | 4522210071     |
+| Antonius Valentino       | 4522210109     |
+| Firja Rakha              | 4522210072     |
+| Adam Fabio               | 4522210094     |
+
+---
 
 ## Installation
 
