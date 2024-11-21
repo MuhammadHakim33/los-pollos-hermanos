@@ -19,13 +19,20 @@
                 <p>Jam Buka : 17.00 - 23.59</p>
             </div>
         </div>
+
         <div class="lg:max-w-md border p-4 rounded">
-            <h1 class="font-bold">Lokasi anda</h1>
-            <div class="flex mt-2 text-gray-600">
-                <i class="ri-map-pin-2-fill mr-2"></i>
-                <p>Jl. IKPN Bintaro, RT.4/RW.10, Bintaro, Kec. Pesanggrahan Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta</p>
-            </div>
+            @auth
+                <h1 class="font-bold">Lokasi anda</h1>
+                <div class="flex mt-2 text-gray-600">
+                    <i class="ri-map-pin-2-fill mr-2"></i>
+                    <p>Jl. IKPN Bintaro, RT.4/RW.10, Bintaro, Kec. Pesanggrahan Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta</p>
+                </div>
+            @else
+                <h1 class="font-bold">Lokasi anda</h1>
+                <p class="text-gray-500 mt-2">Silakan <a href="{{ route('login') }}" class="text-blue-500 hover:underline">login</a> untuk melihat alamat Anda.</p>
+            @endauth
         </div>
+
     </div>
 </section>
 
