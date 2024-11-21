@@ -14,7 +14,7 @@
           <img
             alt="Selera Panca Logo"
             class="h-20 rounded-xl"
-            src="{{ asset('storage/image/Logo.png') }}"
+            src="{{ asset('storage/image/LogoRM.png') }}"
           />
           <span class="ml-2 text-xl font-semibold"> Rumah Makan Selera Panca </span>
         </div>

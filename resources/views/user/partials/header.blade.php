@@ -1,7 +1,7 @@
 <header class="bg-white sticky top-0 inset-x-0 border-b shadow-sm z-10">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
         <div class="flex items-center">
-            <img alt="Selera Panca Logo" class="h-20 rounded-xl" src="{{ asset('storage/image/Logo.png') }}"/>
+            <img alt="Selera Panca Logo" class="h-20 rounded-xl" src="{{ asset('storage/image/LogoRM.png') }}"/>
         </div>
         <div class="flex items-center gap-x-4">
             @auth
