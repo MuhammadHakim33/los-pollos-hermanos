@@ -27,9 +27,7 @@
                     <i class="ri-map-pin-2-fill mr-2"></i>
                     <p>Jl. IKPN Bintaro, RT.4/RW.10, Bintaro, Kec. Pesanggrahan Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta</p>
                 </div>
-            @else
-                <h1 class="font-bold">Lokasi anda</h1>
-                <p class="text-gray-500 mt-2">Silakan <a href="{{ route('login') }}" class="text-blue-500 hover:underline">login</a> untuk melihat alamat Anda.</p>
+           
             @endauth
         </div>
 
