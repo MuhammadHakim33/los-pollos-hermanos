@@ -19,19 +19,23 @@
                 <p>Jam Buka : 17.00 - 23.59</p>
             </div>
         </div>
-        <div class="lg:max-w-md border p-4 rounded">
-            <h1 class="font-bold">Lokasi anda</h1>
-            <div class="flex mt-2 text-gray-600">
-                <i class="ri-map-pin-2-fill mr-2"></i>
-                <p>Jl. IKPN Bintaro, RT.4/RW.10, Bintaro, Kec. Pesanggrahan Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta</p>
+
+        @auth
+            <div class="lg:max-w-md border-2 p-4 rounded">
+                    <h1 class="font-bold">Lokasi anda</h1>
+                    <div class="flex mt-2 text-gray-600">
+                        <i class="ri-map-pin-2-fill mr-2"></i>
+                        <p>Jl. IKPN Bintaro, RT.4/RW.10, Bintaro, Kec. Pesanggrahan Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta</p>
+                    </div>
             </div>
-        </div>
+        @endauth
+
     </div>
 </section>
 
 <!-- CATALOG -->
 <main class="container mx-auto px-4 mt-8 space-y-6">
-    <h2 class="text-xl font-bold mb-4">Aneka Nasi Goreng</h2>
+    <h2 class="text-xl font-bold mb-4">Aneka Makanan</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         @foreach ($menus as $menu)
         <form action="/cart" method="post">
@@ -39,13 +43,15 @@
             <input type="text" name="menu_id" value="{{ $menu->id }}" readonly hidden>
             <input type="text" name="menu_name" value="{{ $menu->name }}" readonly hidden>
             <input type="text" name="menu_price" value="{{ $menu->price }}" readonly hidden>
-            <button type="submit" class="bg-white p-3 rounded shadow flex gap-4 border border-transparent hover:border hover:border-blue-500 hover:bg-blue-50/20 relative">
+            <button type="submit" class="bg-white p-3 rounded shadow flex gap-4 border border-transparent hover:border hover:border-blue-500 hover:bg-blue-50/20 relative min-h-[185px]">
                 <img class="w-28 aspect-square object-cover rounded" src="{{ $menu->path_img }}"/>
-                <div class="text-left">
+
+                <div class="text-left flex flex-col justify-between h-full">
                     <h3 class="mt-2 font-bold capitalize">{{ $menu->name }}</h3>
-                    <p class="text-gray-600">{{ $menu->desc }}</p>
+                    <p class="text-gray-600 line-clamp-3">{{ $menu->desc }}</p>
                     <p class="mt-2 font-medium">Rp{{ number_format($menu->price) }}</p>
                 </div>
+
                 <div class="bg-blue-500 text-white rounded-full w-9 h-9 absolute right-3 bottom-3 flex justify-center items-center">
                     <i class="ri-add-fill ri-xl"></i>
                 </div>
