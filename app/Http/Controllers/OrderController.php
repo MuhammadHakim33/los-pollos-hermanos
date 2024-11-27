@@ -12,12 +12,6 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->cart = Cart::instance(auth()->user()->email);
-        dump($this->cart->count());
-
-        if($this->cart->count() == 0) {
-            return redirect('/');
-            // dump("Tes");
-        }
     }
 
     public function checkout()

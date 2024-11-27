@@ -6,6 +6,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 
+use App\Http\Middleware\EnsureCartFilled;
+
+
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
@@ -14,7 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/cart/{id}/decrease', [CartController::class, 'decrease']);
     Route::put('/cart/{id}/increase', [CartController::class, 'increase']);
 
-    Route::get('/checkout', [OrderController::class, 'checkout']);
+    Route::get('/checkout', [OrderController::class, 'checkout'])->middleware(EnsureCartFilled::class);
 });
 
 
