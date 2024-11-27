@@ -12,11 +12,9 @@
       <div class="flex items-center justify-between mb-6">
         <div class="flex items-center">
           <img
-            alt="Gofood logo"
-            class="h-8 w-8"
-            height="40"
-            src="https://storage.googleapis.com/a1aa/image/wlkjVCA2sNYMHpVXernsNTxfiBsoFfFYrXSOAiJz9Onoe0iOB.jpg"
-            width="40"
+            alt="Selera Panca Logo"
+            class="h-20 rounded-xl"
+            src="{{ asset('storage/image/LogoRM.png') }}"
           />
           <span class="ml-2 text-xl font-semibold"> Rumah Makan Selera Panca </span>
         </div>
