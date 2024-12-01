@@ -9,7 +9,7 @@
 | Muhammad Rachel Fathan   | 4522210071     |
 | Antonius Valentino       | 4522210109     |
 | Firja Rakha              | 4522210072     |
-| Adam Fabio               | 4522210094     |
+| Adam Fabio Segara Kaze   | 4522210094     |
 
 ---
 
