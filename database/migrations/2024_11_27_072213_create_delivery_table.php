@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('delivery', function (Blueprint $table) {
-            $table->char('id', 255)->primary();
+            $table->ulid('id')->primary();
             $table->char('id_order', 255);
             $table->enum('status', ['pending', 'process', 'shipped', 'delivered', 'failed'])->default('pending');
             $table->timestamps();
