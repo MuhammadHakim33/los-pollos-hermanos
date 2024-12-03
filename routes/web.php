@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
@@ -17,9 +18,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [OrderController::class, 'checkout']);
 });
 
+// Admin
+// Route::controller(AuthController::class)->group(function () {
+//     Route::middleware('auth:admin')->group(function () {
+//         Route::get('/admin/login', 'showLoginFormAdmin');
+//         Route::post('/admin/login', 'login');
+//         Route::get('/admin/register', 'showRegistrationFormAdmin');
+//         Route::post('/admin/register', 'register');
+//     });
+//     Route::middleware('auth')->group(function () {
+//         Route::post('/logout', 'logout');
+//     });
+// });
 
-
-
+Route::get('/admin/login', [AdminController::class, 'showLoginFormAdmin'])->name('loginAdmin');
+Route::post('/admin/login', [AdminController::class, 'login'])->name('loginAdmin');
+Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('adminDashboard');
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->name('adminDashboard');
 
 
 
@@ -51,4 +68,4 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

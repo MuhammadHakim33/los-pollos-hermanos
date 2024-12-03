@@ -30,17 +30,24 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+
+            // Redirect berdasarkan role
+            $role = Auth::user()->role;
+
+            if ($role === 'admin') {
+                return redirect()->route('adminDashboard');
+            } elseif ($role === 'user') {
+                return redirect()->route('userDashboard'); // Ganti sesuai route user dashboard Anda
+            }
         }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
-
 
     //REGISTER_METHOD
     public function showRegistrationForm()
@@ -102,6 +109,7 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
+}
 
     //Resetpassword
     // public function showResetPasswordForm()
@@ -121,4 +129,3 @@ class AuthController extends Controller
     //         ? back()->with(['status' => __($status)])
     //         : back()->withErrors(['email' => __($status)]);
     // }
-}

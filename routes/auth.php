@@ -32,8 +32,6 @@ Route::controller(AuthController::class)->group(function () {
 
 
 
-
-
 // Rute reset PW
 // Route::get('/forgot-password', [AuthController::class, 'showResetPasswordForm'])->name('password.request');
 // Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
