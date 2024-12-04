@@ -9,6 +9,11 @@ Route::controller(AuthController::class)->group(function () {
         Route::post('/login', 'login');
         Route::get('/register', 'showRegistrationForm')->name('register');
         Route::post('/register', 'register');
+
+        //reset password
+        Route::get('/password/reset', 'showResetPasswordForm')->name('password.request');
+        Route::post('/password/email', 'sendResetLink')->name('password.email');
+        Route::post('/password/reset', 'resetPassword')->name('password.update');
     });
     Route::middleware('auth')->group(function () {
         Route::post('/logout', 'logout')->name('logout');

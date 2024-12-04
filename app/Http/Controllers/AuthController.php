@@ -104,21 +104,43 @@ class AuthController extends Controller
     }
 
     //Resetpassword
-    // public function showResetPasswordForm()
-    // {
-    //     return view('user.auth.resetPW.reset'); 
-    // }
+    public function showResetPasswordForm()
+    {
+        return view('user.auth.resetPW.reset'); 
+    }
 
-    // public function sendResetLink(Request $request)
-    // {
-    //     $request->validate(['email' => 'required|email']);
+    public function sendResetLink(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email' // Sesuaikan kolom email dengan tabel users
+        ]);
+    
+        // Kirim email reset password menggunakan fitur bawaan Laravel
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+    
+        return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+    }
 
-    //     $status = Password::sendResetLink(
-    //         $request->only('email')
-    //     );
-
-    //     return $status === Password::RESET_LINK_SENT
-    //         ? back()->with(['status' => __($status)])
-    //         : back()->withErrors(['email' => __($status)]);
-    // }
+    public function resetPassword(Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string|min:8|confirmed',
+            'token' => 'required',
+        ]);
+    
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill(['password' => bcrypt($password)])->save();
+            }
+        );
+    
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
+    }
 }
