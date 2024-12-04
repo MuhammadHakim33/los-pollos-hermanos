@@ -13,7 +13,7 @@ class MenuTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('menu')->insert([
+        DB::table('menus')->insert([
             [
                 'name' => 'Gudeg',
                 'desc' => 'Cita rasa yang manis khas Jogjakarta ditemani dengan telur bulat yang lezat',

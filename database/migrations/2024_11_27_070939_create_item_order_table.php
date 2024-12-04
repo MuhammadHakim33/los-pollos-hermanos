@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_order')->references('id')->on('orders');
-            $table->foreign('id_menu')->references('id')->on('menu');
+            $table->foreign('id_menu')->references('id')->on('menus');
         });
     }
 

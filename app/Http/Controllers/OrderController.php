@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Models\Order;
 use App\Models\ItemOrder;
@@ -38,14 +37,89 @@ class OrderController extends Controller
 
     public function order(Request $request)
     {
-        // dump($this->generateOrderCode());
+        $carts = $this->cart->content();
+        $total = (int)$this->cart->total();
+        $method_payment = $request->method_payment;
+
+        try {
+            DB::beginTransaction();
+
+            // insert record order
+            $order = Order::create([
+                'id_user' => auth()->user()->id,
+                'total' => $total,
+                'status' => 'pending'
+            ]);
+
+            // insert record item order
+            $items = [];
+            foreach($carts as $cart) {
+                $items[] = [
+                    'id_order' => $order->id,
+                    'id_menu' => $cart->id,
+                    'qty' => $cart->qty,
+                    'price' => $cart->price,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ];
+            }
+            ItemOrder::insert($items);
+            
+            // insert record delivery
+            Delivery::create([
+                'id_order' => $order->id,
+                'status' => 'pending'
+            ]);
+
+            DB::commit();
+        } 
+        catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+
+        dd($order->id);
+
+        // $order = new Order([
+        //     'id_user' => auth()->user()->id,
+        //     'total' => $total,
+        //     'status' => 'pending'
+        // ]);
+
+        // DB::transaction(function () use($order, $carts) {
+        //     $order->save();
+
+        //     $items = [];
+        //     foreach($carts as $cart) {
+        //         $item = [];
+        //         $item['id_order'] = $order->id;
+        //         $item['id_menu'] = $cart->id;
+        //         $item['qty'] = $cart->qty;
+        //         $item['price'] = $cart->price;
+        //         $items[] = $item;
+        //     }
+        //     ItemOrder::create($items);
+
+        //     Delivery::create([
+        //         'id_order' => $order->id,
+        //         'status' => 'pending'
+        //     ]);
+        // });
+
+        // dd($order->id);
+
+        // dd($total);
+
+         // dump($this->generateOrderCode());
         // dump(Str::ulid());
         // die;
-        $id_user = auth()->user()->id;
-        $carts = $this->cart->content();
-        $total = $this->cart->total();
-        $method_payment = $request->method_payment;
-        $items = [];
+        // $id_user = auth()->user()->id;
+
+        // dump($order);
+        // dump($item_order);
+        // dump($delivery);
+        // die;
+
 
         // DB::transaction(function () use($id_user, $carts) {
         //     $order = Order::create([
@@ -79,17 +153,5 @@ class OrderController extends Controller
         //         'status' => 'pending'
         //     ]);
         // });
-    }
-
-    function generateOrderCode() 
-    {
-        return 'ORD-'.Carbon::now()->format('Ymd').'-'.Str::upper(Str::random(5));
-    }
-
-    public function generatePaymentCode()
-    {
-        $prefix = date('Ymd');
-        $randomNumber = rand(1000, 9999);
-        return $prefix.$randomNumber;
     }
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->char('id', 255)->primary();
             $table->unsignedBigInteger('id_user');
+            $table->integer('total');
             $table->enum('status', ['failed', 'pending', 'success'])->default('pending');
             $table->timestamps();
 

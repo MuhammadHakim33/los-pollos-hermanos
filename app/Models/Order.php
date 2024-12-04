@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Observers\OrderObserver;
 
+#[ObservedBy(OrderObserver::class)]
 class Order extends Model
 {
+    protected $table = 'orders';
+
     public $incrementing = false;
 
     protected $guarded = [];
