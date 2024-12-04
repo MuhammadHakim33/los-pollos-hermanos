@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Address;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('user.auth.register');
     }
 
     /**
@@ -30,21 +31,34 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'nama' => ['required', 'string', 'max:255'],
+            'no_telp' => ['required', 'string', 'max:15'],
+            'email_regis' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+            'password_regis' => ['required', 'string', 'min:8'],
+            'alamat' => ['required', 'string', 'max:255'],
+            'kecamatan' => ['required', 'string', 'max:255'],
+            'kelurahan' => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $request->nama,
+            'email' => $request->email_regis,
+            'password' => Hash::make($request->password_regis),
+            'phone' => $request->no_telp,
+            'role' => 'user',
+        ]);
+
+        $user_address = Address::create([
+            'id_user' => $user->id,
+            'detail' => $request->alamat,
+            'kecamatan' => $request->kecamatan,
+            'kelurahan' => $request->kelurahan,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('home', absolute: false));
     }
 }
