@@ -95,6 +95,7 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    //Logout
     public function logout(Request $request)
     {
         Auth::logout();
@@ -114,15 +115,17 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email|exists:users,email' // Sesuaikan kolom email dengan tabel users
         ]);
+
+        // dd($request);
     
         // Kirim email reset password menggunakan fitur bawaan Laravel
         $status = Password::sendResetLink(
             $request->only('email')
         );
     
-        return $status === Password::RESET_LINK_SENT
-        ? back()->with(['status' => __($status)])
-        : back()->withErrors(['email' => __($status)]);
+        // return $status === Password::RESET_LINK_SENT
+        // ? back()->with(['status' => __($status)])
+        // : back()->withErrors(['email' => __($status)]);
     }
 
     public function resetPassword(Request $request){

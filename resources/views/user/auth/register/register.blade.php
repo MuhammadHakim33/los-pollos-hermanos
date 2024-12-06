@@ -38,7 +38,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
            <!-- Nama -->
            <div class="relative">
-            <input type="text" name="nama" id="nama" class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+            <input 
+            type="text" 
+            name="nama" 
+            id="nama" 
+            class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
             focus:pt-6
             focus:pb-2
             [&:not(:placeholder-shown)]:pt-6
@@ -58,7 +62,11 @@
 
           <!-- No Telepon -->
           <div class="relative">
-            <input type="text" name="no_telp" id="no_telp" class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+            <input 
+            type="text" 
+            name="no_telp" 
+            id="no_telp" 
+            class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
             focus:pt-6
             focus:pb-2
             [&:not(:placeholder-shown)]:pt-6
@@ -78,7 +86,11 @@
 
           <!-- email -->
           <div class="relative">
-            <input type="email" name="email_regis" id="email_regis" class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+            <input 
+            type="email" 
+            name="email_regis" 
+            id="email_regis" 
+            class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
             focus:pt-6
             focus:pb-2
             [&:not(:placeholder-shown)]:pt-6
@@ -98,7 +110,11 @@
           
           <!-- password -->
           <div class="relative">
-            <input type="password" name="password_regis" id="password_regis" class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+            <input 
+            type="password" 
+            name="password_regis" 
+            id="password_regis" 
+            class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
             focus:pt-6
             focus:pb-2
             [&:not(:placeholder-shown)]:pt-6
@@ -118,7 +134,11 @@
          
           <!-- Alamat Detail -->
           <div class="relative">
-            <input type="text" name="alamat" id="alamat" class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+            <input 
+            type="text" 
+            name="alamat" 
+            id="alamat" 
+            class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
             focus:pt-6
             focus:pb-2
             [&:not(:placeholder-shown)]:pt-6
@@ -138,7 +158,11 @@
 
           <!-- Kecamatan -->
           <div class="relative">
-            <input type="text" name="kecamatan" id="kecamatan" class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+            <input 
+            type="text" 
+            name="kecamatan" 
+            id="kecamatan" 
+            class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
             focus:pt-6
             focus:pb-2
             [&:not(:placeholder-shown)]:pt-6
@@ -158,7 +182,11 @@
 
           <!-- Kelurahan -->
           <div class="relative">
-            <input type="text" name="kelurahan" id="kelurahan" class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+            <input 
+            type="text" 
+            name="kelurahan" 
+            id="kelurahan" 
+            class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
             focus:pt-6
             focus:pb-2
             [&:not(:placeholder-shown)]:pt-6
