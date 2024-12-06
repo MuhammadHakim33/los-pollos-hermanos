@@ -11,7 +11,8 @@
 </header>
 
 <main class="container mx-auto p-4 mt-8">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <form action="/checkout" method="post" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        @csrf
         <!-- Part 1: Delivery Form and Payment Method -->
         <div class="lg:col-span-2 space-y-6">
             <div class="bg-white p-6 rounded shadow-md">
@@ -32,12 +33,12 @@
                 <h3 class="text-base font-bold mb-4">METODE PEMBAYARAN</h3>
                 <div class="grid sm:grid-cols-2 gap-2">
                     <label for="cod" class="flex p-3 w-full bg-white border border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500">
-                        <input type="radio" name="method_payment" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="cod">
-                        <span class="text-sm font-medium text-gray-600 ms-3">Tunai</span>
+                        <input type="radio" name="method_payment" value="cod" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="cod" checked>
+                        <span class="text-sm font-medium text-gray-600 ms-3">COD</span>
                     </label>
 
                     <label for="transfer" class="flex p-3 w-full bg-white border border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500">
-                        <input type="radio" name="method_payment" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="transfer" checked="">
+                        <input type="radio" name="method_payment" value="transfer" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="transfer">
                         <span class="text-sm font-medium text-gray-600 ms-3">Transfer Bank</span>
                     </label>
                 </div>
@@ -69,11 +70,11 @@
                 <h3>Total Bayar</h3>
                 <p class="font-semibold">Rp{{ $total_pay }}</p>
             </div>
-            <button type="button" class="py-3 px-4 text-sm font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            <button type="submit" class="py-3 px-4 text-sm font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                 Pesan
             </button>
         </div>
-    </div>
+    </form>
 </main>
 
 <!-- MODAL GANTI ALAMAT -->
