@@ -17,22 +17,6 @@ class CartController extends Controller
         $this->cart = Cart::instance(auth()->user()->email);
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        // 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
         $this->cart->add([
@@ -44,30 +28,6 @@ class CartController extends Controller
         ])->associate('App\Models\Menu');
 
         return back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        // echo $request->menu_id; 
     }
 
     public function decrease(Request $request, string $id)
