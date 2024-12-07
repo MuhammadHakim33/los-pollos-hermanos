@@ -8,5 +8,12 @@ class ItemOrder extends Model
 {
     protected $table = 'item_order';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'id_order',
+        'id_menu',
+        'qty',
+        'price',
+        'created_at',
+        'updated_at',
+    ];
 }

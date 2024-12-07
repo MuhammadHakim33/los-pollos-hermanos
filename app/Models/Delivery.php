@@ -13,5 +13,8 @@ class Delivery extends Model
 
     public $incrementing = false;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'id_order',
+        'status',
+    ];
 }

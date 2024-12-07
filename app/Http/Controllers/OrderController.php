@@ -42,6 +42,7 @@ class OrderController extends Controller
         $method_payment = $request->method_payment;
 
         try {
+
             DB::beginTransaction();
 
             // insert record order
@@ -55,103 +56,24 @@ class OrderController extends Controller
             $items = [];
             foreach($carts as $cart) {
                 $items[] = [
-                    'id_order' => $order->id,
                     'id_menu' => $cart->id,
                     'qty' => $cart->qty,
                     'price' => $cart->price,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
                 ];
             }
-            ItemOrder::insert($items);
+            $order->itemOrder()->createMany($items);
             
             // insert record delivery
-            Delivery::create([
-                'id_order' => $order->id,
-                'status' => 'pending'
-            ]);
+            $delivery = $order->delivery()->create(['status' => 'pending']);
 
             DB::commit();
         } 
         catch (\Throwable $th) {
             DB::rollBack();
-            throw $th;
+            // throw $th;
+            return back()->with('failed', 'Gagal memesan, mohon ulangi kembali!');
         }
 
         dd($order->id);
-
-        // $order = new Order([
-        //     'id_user' => auth()->user()->id,
-        //     'total' => $total,
-        //     'status' => 'pending'
-        // ]);
-
-        // DB::transaction(function () use($order, $carts) {
-        //     $order->save();
-
-        //     $items = [];
-        //     foreach($carts as $cart) {
-        //         $item = [];
-        //         $item['id_order'] = $order->id;
-        //         $item['id_menu'] = $cart->id;
-        //         $item['qty'] = $cart->qty;
-        //         $item['price'] = $cart->price;
-        //         $items[] = $item;
-        //     }
-        //     ItemOrder::create($items);
-
-        //     Delivery::create([
-        //         'id_order' => $order->id,
-        //         'status' => 'pending'
-        //     ]);
-        // });
-
-        // dd($order->id);
-
-        // dd($total);
-
-         // dump($this->generateOrderCode());
-        // dump(Str::ulid());
-        // die;
-        // $id_user = auth()->user()->id;
-
-        // dump($order);
-        // dump($item_order);
-        // dump($delivery);
-        // die;
-
-
-        // DB::transaction(function () use($id_user, $carts) {
-        //     $order = Order::create([
-        //         'id' => $this->generateOrderCode(),
-        //         'id_user' => $id_user,
-        //         'status' => 'pending'
-        //     ]);
-
-        //     foreach($carts as $cart) {
-        //         $item = [];
-        //         $item['id_order'] = $order->id;
-        //         $item['id_menu'] = $cart->id;
-        //         $item['qty'] = $cart->qty;
-        //         $item['price'] = $cart->price;
-        //         $items[] = $item;
-        //     }
-
-        //     ItemOrder::create($items);
-
-        //     Delivery::create([
-        //         'id' => Str::ulid(),
-        //         'id_order' => $order->id,
-        //         'status' => 'pending'
-        //     ]);
-
-        //     Payment::create([
-        //         'id' => $this->generatePaymentCode(),
-        //         'id_order' => $order->id,
-        //         'method_payment' => $method_payment,
-        //         'total' => $total,
-        //         'status' => 'pending'
-        //     ]);
-        // });
     }
 }

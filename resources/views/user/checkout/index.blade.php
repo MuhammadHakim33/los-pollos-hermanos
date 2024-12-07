@@ -115,6 +115,26 @@
 </div>
 <!-- END MODAL GANTI ALAMAT -->
 
+<!-- TOAST -->
+@if(session('failed'))
+<div class="absolute bottom-0 end-0 max-w-md p-10">
+    <div id="dismiss-toast" class="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 bg-white border border-gray-200 rounded shadow-lg" role="alert" tabindex="-1" aria-labelledby="hs-toast-dismiss-button-label">
+        <div class="flex gap-x-4 p-4">
+            <p id="hs-toast-dismiss-button-label" class="text-sm text-gray-700">
+                {{ session('failed') }}
+            </p>
+            <div class="ms-auto">
+                <button type="button" class="inline-flex shrink-0 justify-center items-center size-5 rounded-lg text-gray-800 opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" aria-label="Close" data-hs-remove-element="#dismiss-toast">
+                    <span class="sr-only">Close</span>
+                    <i class="ri-close-large-line"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+<!-- END TOAST -->
+
 <!-- FOOTER -->
 @include('user.partials.footer')
 @endsection

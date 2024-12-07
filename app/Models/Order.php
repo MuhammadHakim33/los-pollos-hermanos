@@ -13,5 +13,20 @@ class Order extends Model
 
     public $incrementing = false;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'id',
+        'id_user',
+        'total',
+        'status'
+    ];
+
+    public function delivery()
+    {
+        return $this->hasOne(Delivery::class, 'id_order');
+    }
+
+    public function itemOrder()
+    {
+        return $this->hasMany(ItemOrder::class, 'id_order');
+    }
 }
