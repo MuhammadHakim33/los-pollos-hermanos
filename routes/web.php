@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/checkout', [OrderController::class, 'checkout'])->middleware(EnsureCartFilled::class);
     Route::post('/checkout', [OrderController::class, 'order'])->middleware(EnsureCartFilled::class);
+    Route::get('/order/{order}', [OrderController::class, 'detail']);
 });
 
 

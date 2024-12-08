@@ -10,70 +10,48 @@
     </div>
 </header>
 
-<main class="container mx-auto p-4 mt-8">
-    <form action="/checkout" method="post" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<main class="container mx-auto max-w-xl p-4 mt-8 space-y-6">
+    <div class="bg-white p-6 rounded border">
+        <h3 class="text-base font-bold mb-4">PENGIRIMAN</h3>
+        <div class="opacity-80 flex content-center items-baseline gap-x-2 mb-4">
+            <i class="ri-map-pin-line"></i>
+            <div>
+                <p class="font-medium">Penerima - {{ $user->name }}</p>
+                <p class="">{{ $user->address->detail }}, Kel. {{ $user->address->kelurahan }}, Kec. {{ $user->address->kecamatan }}</p>
+            </div>
+        </div>
+        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-500 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-scale-animation-modal">
+            Ganti Alamat
+        </button>
+    </div>
+    <form action="/checkout" method="post" class="bg-white gap-y-4 p-6 rounded border flex flex-col">
         @csrf
-        <!-- Part 1: Delivery Form and Payment Method -->
-        <div class="lg:col-span-2 space-y-6">
-            <div class="bg-white p-6 rounded shadow-md">
-                <h3 class="text-base font-bold mb-4">PENGIRIMAN</h3>
-                <div class="opacity-80 flex content-center items-baseline gap-x-2 mb-4">
-                    <i class="ri-map-pin-line"></i>
-                    <div>
-                        <p class="font-medium">Penerima - {{ $user->name }}</p>
-                        <p class="">{{ $user->address->detail }}, Kel. {{ $user->address->kelurahan }}, Kec. {{ $user->address->kecamatan }}</p>
-                    </div>
+        <h3 class="text-base font-bold">RINGKASAN PESANAN</h3>
+        <div class="space-y-4 grow">
+            @foreach ($carts as $menu)
+            <div class="flex items-center gap-x-4">
+                <img class="w-14 h-14 rounded aspect-square object-cover" src="{{ $menu->model->path_img }}" />
+                <div class="grow">
+                    <h3 class="text-lg font-medium">{{ $menu->name }}</h3>
+                    <p>({{ $menu->qty }}x) Rp{{ number_format($menu->price) }}</p>
                 </div>
-
-                <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-500 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-scale-animation-modal">
-                    Ganti Alamat
-                </button>
             </div>
-            <div class="bg-white p-6 rounded shadow-md">
-                <h3 class="text-base font-bold mb-4">METODE PEMBAYARAN</h3>
-                <div class="grid sm:grid-cols-2 gap-2">
-                    <label for="cod" class="flex p-3 w-full bg-white border border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500">
-                        <input type="radio" name="method_payment" value="cod" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="cod" checked>
-                        <span class="text-sm font-medium text-gray-600 ms-3">COD</span>
-                    </label>
-
-                    <label for="transfer" class="flex p-3 w-full bg-white border border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500">
-                        <input type="radio" name="method_payment" value="transfer" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="transfer">
-                        <span class="text-sm font-medium text-gray-600 ms-3">Transfer Bank</span>
-                    </label>
-                </div>
+            @endforeach
+        </div>
+        <hr>
+        <div class="space-y-1">
+            <div class="flex justify-between items-center text-base text-gray-500">
+                <h5>Total Harga</h5>
+                <p>Rp{{ $total_price }}</p>
             </div>
         </div>
-
-        <!-- Part 2: Selected Menu -->
-        <div class="bg-white gap-y-4 p-6 rounded shadow-md flex flex-col">
-            <h3 class="text-base font-bold">RINGKASAN PESANAN</h3>
-            <div class="space-y-4 grow">
-                @foreach ($carts as $menu)
-                <div class="flex items-center gap-x-4">
-                    <img class="w-14 h-14 rounded aspect-square object-cover" src="{{ $menu->model->path_img }}" />
-                    <div class="grow">
-                        <h3 class="text-lg font-medium">{{ $menu->name }}</h3>
-                        <p>({{ $menu->qty }}x) Rp{{ number_format($menu->price) }}</p>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            <hr>
-            <div class="space-y-1">
-                <div class="flex justify-between items-center text-base text-gray-500">
-                    <h5>Total Harga</h5>
-                    <p>Rp{{ $total_price }}</p>
-                </div>
-            </div>
-            <div class="flex justify-between items-center text-lg">
-                <h3>Total Bayar</h3>
-                <p class="font-semibold">Rp{{ $total_pay }}</p>
-            </div>
-            <button type="submit" class="py-3 px-4 text-sm font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                Pesan
-            </button>
+        <div class="flex justify-between items-center text-lg">
+            <h3>Total Bayar</h3>
+            <p class="font-semibold">Rp{{ $total_pay }}</p>
         </div>
+        <button type="submit" class="py-3 px-4 text-sm font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            Pesan & Bayar
+        </button>
     </form>
 </main>
 

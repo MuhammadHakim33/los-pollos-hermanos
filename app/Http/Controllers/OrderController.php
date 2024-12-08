@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Order;
-use App\Models\ItemOrder;
-use App\Models\Payment;
-use App\Models\Delivery;
+// use Illuminate\Support\Carbon;
+// use App\Models\ItemOrder;
+// use App\Models\Payment;
+// use App\Models\Delivery;
 
 class OrderController extends Controller
 {
@@ -74,6 +75,15 @@ class OrderController extends Controller
             return back()->with('failed', 'Gagal memesan, mohon ulangi kembali!');
         }
 
-        dd($order->id);
+        $this->cart->destroy();
+
+        return redirect('/order/'.$order->id);
+    }
+
+    public function detail(Order $order)
+    {
+        Gate::authorize('order-user', $order);
+
+        return view('user.checkout.detail', ['order' => $order]);
     }
 }

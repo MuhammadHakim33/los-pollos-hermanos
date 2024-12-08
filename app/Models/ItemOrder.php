@@ -16,4 +16,9 @@ class ItemOrder extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class, 'id_menu');
+    }
 }
