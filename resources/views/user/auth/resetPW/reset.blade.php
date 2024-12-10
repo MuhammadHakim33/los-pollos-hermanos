@@ -39,7 +39,9 @@
                 [&:not(:placeholder-shown)]:pt-6
                 [&:not(:placeholder-shown)]:pb-2
                 autofill:pt-6
-                autofill:pb-2" placeholder="you@email.com">
+                autofill:pb-2" placeholder="you@email.com"
+                value="{{ old('email') }}" 
+                required autofocus>
                 <label for="email" class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent  origin-[0_0] dark:text-black peer-disabled:opacity-50 peer-disabled:pointer-events-none
                 peer-focus:scale-90
                 peer-focus:translate-x-0.5
@@ -63,7 +65,7 @@
                 </div>
             @endif
 
-            <button type="submit" class="mt-6 py-3 w-full inline-flex items-center justify-center text-sm font-medium rounded-lg bg-green-300 text-gray-500 mb-5">
+            <button type="submit" class="mt-6 py-3 w-full inline-flex items-center justify-center text-sm font-medium rounded-lg bg-green-500 text-gray-500 mb-5">
                 Kirim Link Reset
             </button>
         </form>
