@@ -79,6 +79,13 @@
         @enderror
       </div>
 
+      <div class="flex justify-end mt-2 mb-5">
+        <a href="{{ route('password.request') }}" class="text-teal-500 text-sm font-medium hover:text-teal-700">
+          Lupa Password?
+        </a>
+      </div>
+
+
       <!-- General Error -->
       @if ($errors->has('email'))
       <div class="text-red-500 text-sm mb-4">
