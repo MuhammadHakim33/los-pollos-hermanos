@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();
             $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('url_pic', 255)->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
 
