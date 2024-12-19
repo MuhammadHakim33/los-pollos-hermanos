@@ -38,7 +38,7 @@
     <h2 class="text-xl font-bold mb-4">Aneka Makanan</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         @foreach ($menus as $menu)
-        <form action="/cart" method="post">
+        <form action="/cart" method="post" class="menu-item">
             @csrf
             <input type="text" name="menu_id" value="{{ $menu->id }}" readonly hidden>
             <input type="text" name="menu_name" value="{{ $menu->name }}" readonly hidden>
@@ -60,6 +60,48 @@
         @endforeach
     </div>
 </main>
+
+<!-- <script>
+    let menuItem = document.getElementsByClassName('menu-item');
+
+    for(let item of menuItem) {
+        item.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // console.log(item.elements[0].name);
+            // console.log(item.elements[2]);
+            // console.log(item.elements[3]);
+
+            let data = JSON.stringify({
+                // _token: parseInt(item.elements[0].value),
+                menu_id: parseInt(item.elements[1].value),
+                menu_name: item.elements[2].value,
+                menu_price:parseInt( item.elements[3].value),
+            })
+            
+            var xhr = new XMLHttpRequest();
+            var url = `${item.action}`;
+
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+            xhr.setRequestHeader('X-CSRF-TOKEN', `${item.elements[0].value}`);
+            xhr.onload = function () {               
+                console.log (this.status);
+            };
+            xhr.send(data);
+
+            // console.log(url);
+        });
+    }
+    
+    // console.log(item);
+    // menuItem.forEach(function(item) {
+    //     console.log(item);
+    // });
+    // menuItem.addEventListener('submit', function(e) {
+    //     e.preventDefault();
+    //     console.log(e);
+    // });
+</script> -->
 
 <!-- FOOTER -->
 @include('user.partials.footer')

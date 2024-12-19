@@ -1,4 +1,3 @@
-import 'preline'
 
 import './bootstrap';
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('desc')->nullable();
             $table->integer('price');
             $table->text('path_img')->nullable();
+            $table->enum('category', ['food', 'drink']);
             $table->enum('status', ['available', 'empty'])->default('available');
             $table->timestamps();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menu');
+        Schema::dropIfExists('menus');
     }
 };
