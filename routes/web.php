@@ -36,10 +36,10 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/admin/login', [AdminController::class, 'showLoginFormAdmin'])->name('loginAdmin');
 Route::post('/admin/login', [AdminController::class, 'login'])->name('loginAdmin');
-Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('adminDashboard');
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('adminDashboard');
+Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+Route::get('/admin/register', [AdminController::class, 'showRegistrationFormAdmin'])->name('registerAdmin');
+Route::post('/admin/register', [AdminController::class, 'showRegistrationFormAdmin'])->name('registerAdmin');
+Route::post('/admin/logout', [AdminController::class, 'logout'])->name('logoutAdmin');
 
 
 
