@@ -12,6 +12,7 @@ class Order extends Model
     public $incrementing = false;
 
     protected $fillable = [
+        'user_id',
         'total',
         'status'
     ];
@@ -21,7 +22,7 @@ class Order extends Model
         return $this->hasOne(Delivery::class);
     }
 
-    public function itemOrder()
+    public function items()
     {
         return $this->hasMany(ItemOrder::class);
     }

@@ -12,6 +12,12 @@ class Delivery extends Model
     public $incrementing = false;
 
     protected $fillable = [
+        'order_id',
         'status',
     ];
+
+    public function address()
+    {
+        return $this->hasOne(DeliveryAddress::class);
+    }
 }

@@ -7,10 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Order;
-// use Illuminate\Support\Carbon;
-// use App\Models\ItemOrder;
-// use App\Models\Payment;
-// use App\Models\Delivery;
 
 class OrderController extends Controller
 {
@@ -23,7 +19,7 @@ class OrderController extends Controller
 
     public function checkout()
     {
-        $user = auth()->user()->load('address');
+        $user = auth()->user();
         $carts = $this->cart->content();
         $total_price = $this->cart->priceTotal();
         $total_pay = $this->cart->total();
@@ -38,9 +34,14 @@ class OrderController extends Controller
 
     public function order(Request $request)
     {
+        $input = $request->validate([
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
+            'detail' => 'required',
+        ]);
+
         $carts = $this->cart->content();
         $total = (int)$this->cart->total();
-        $method_payment = $request->method_payment;
 
         try {
 
@@ -48,24 +49,28 @@ class OrderController extends Controller
 
             // insert record order
             $order = Order::create([
-                'id_user' => auth()->user()->id,
+                'user_id' => auth()->user()->id,
                 'total' => $total,
                 'status' => 'pending'
             ]);
 
             // insert record item order
             $items = [];
+
             foreach($carts as $cart) {
                 $items[] = [
-                    'id_menu' => $cart->id,
+                    'menu_id' => $cart->id,
                     'qty' => $cart->qty,
                     'price' => $cart->price,
                 ];
             }
-            $order->itemOrder()->createMany($items);
+            $order->items()->createMany($items);
             
             // insert record delivery
             $delivery = $order->delivery()->create(['status' => 'pending']);
+
+            // insert record delivery address
+            $x = $delivery->address()->create($input);
 
             DB::commit();
         } 

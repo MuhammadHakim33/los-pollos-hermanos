@@ -1,5 +1,5 @@
 <x-user-layout>
-    <x-user.header />
+    <x-user.header :$carts :$total />
 
     <section class="bg-white py-8 rounded shadow-sm">
         <div class="container mx-auto px-4 flex flex-wrap justify-between items-end gap-4">

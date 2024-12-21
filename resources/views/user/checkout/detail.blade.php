@@ -1,16 +1,5 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery</title>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen border">
-    <div class="bg-white rounded p-6 mx-4 w-full max-w-3xl ">
+<x-user-layout>
+    <div class="bg-white rounded p-6 w-full max-w-3xl mt-10 mx-auto">
         <div class="mb-4 text-center">
             <h1 class="text-2xl font-semibold">{{ $order->id }}</h1>
             <p class="text-gray-500">{{ $order->created_at }}</p>
@@ -65,10 +54,10 @@
         <!-- End Stepper -->
         <div class="border-t border-gray-200 py-4">
             <h2 class="text-gray-700 font-semibold mb-2">Order Detail</h2>
-            @foreach ($order->itemOrder as $item)
+            @foreach ($order->items as $item)
                 <div class="flex items-center mb-2">
                     <h3 class="text-gray-500 font-medium flex-1">{{ '('.$item->qty.') '.$item->menu->name }}</h3>
-                    <p class="text-gray-500 font-medium">{{ 'Rp'.$item->price }}</p>
+                    <p class="text-gray-500 font-medium">Rp {{ number_format($item->price) }}</p>
                 </div>
             @endforeach
         </div>
@@ -83,14 +72,13 @@
             </div>
             <div class="flex justify-between mb-2">
                 <span class="text-gray-500">Subtotal</span>
-                <span class="text-gray-700">{{ 'Rp'.$order->total }}</span>
+                <span class="text-gray-700">Rp {{ number_format($order->total) }}</span>
             </div>
             <div class="border-t border-gray-200 my-2"></div>
             <div class="flex justify-between mt-4">
                 <span class="text-gray-700 font-semibold">Total</span>
-                <span class="text-gray-700 font-semibold">{{ 'Rp'.$order->total }}</span>
+                <span class="text-gray-700 font-semibold">Rp {{ number_format($order->total) }}</span>
             </div>
         </div>
     </div>
-</body>
-</html>
+</x-user-layout>

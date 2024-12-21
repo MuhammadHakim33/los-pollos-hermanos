@@ -9,7 +9,7 @@
         <div class="text-left flex flex-col justify-between h-full">
             <h3 class="mt-2 font-bold capitalize">{{ $item->name }}</h3>
             <p class="text-gray-600 line-clamp-3">{{ str($item->desc)->limit(50) }}</p>
-            <p class="mt-2 font-medium">Rp{{ number_format($item->price) }}</p>
+            <p class="mt-2 font-medium">Rp {{ number_format($item->price) }}</p>
         </div>
 
         <div class="bg-blue-500 text-white rounded-full w-9 h-9 absolute right-3 bottom-3 flex justify-center items-center">

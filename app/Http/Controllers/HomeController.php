@@ -21,17 +21,16 @@ class HomeController extends Controller
         $carts = [];
         $total_price = 0;
 
-        // if(auth()->user()) {
-        //     $carts = Cart::instance(auth()->user()->email)->content();
-        //     $total_price = Cart::priceTotal();
-        //     // dump(Cart::instance(auth()->user()->email)->content());
-        // }
+        if(auth()->user()) {
+            $carts = Cart::instance(auth()->user()->email)->content();
+            $total_price = Cart::priceTotal();
+        }
 
         return view('user.home.index', [
             'foods' => $foods,
             'drinks' => $drinks,
             'carts' => $carts,
-            'total_price' => $total_price,
+            'total' => $total_price,
         ]);
     }
 
