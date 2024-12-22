@@ -19,18 +19,18 @@ class HomeController extends Controller
                     ->where('category', 'drink')
                     ->get();
         $carts = [];
-        $total_price = 0;
+        $total = 0;
 
         if(auth()->user()) {
             $carts = Cart::instance(auth()->user()->email)->content();
-            $total_price = Cart::priceTotal();
+            $total = Cart::priceTotal();
         }
 
         return view('user.home.index', [
             'foods' => $foods,
             'drinks' => $drinks,
             'carts' => $carts,
-            'total' => $total_price,
+            'total' => $total,
         ]);
     }
 

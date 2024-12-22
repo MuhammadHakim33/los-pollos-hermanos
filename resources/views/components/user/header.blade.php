@@ -1,3 +1,8 @@
+@php
+    $isCartEmpty = count($carts) > 0 ? true : false ;
+@endphp
+
+
 <header class="bg-white sticky top-0 inset-x-0 border-b shadow-sm z-10">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
         <div class="flex items-center">
@@ -25,8 +30,8 @@
                 Register
             </a>
             @endguest
-            <button type="button" @class(['flex','shrink-0','justify-center','items-center','gap-2','size-[38px]','text-sm','font-medium','rounded-lg','border', 'border-green-700' => ($carts->count()), 'hover:bg-gray-100','focus:bg-gray-100']) aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-cart" data-hs-overlay="#modal-cart">
-                <i @class(['ri-shopping-basket-line', 'ri-lg', 'text-green-700' => ($carts->count())])></i>
+            <button type="button" @class(['flex','shrink-0','justify-center','items-center','gap-2','size-[38px]','text-sm','font-medium','rounded-lg','border', 'border-green-700' => $isCartEmpty, 'hover:bg-gray-100','focus:bg-gray-100']) aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-cart" data-hs-overlay="#modal-cart">
+                <i @class(['ri-shopping-basket-line', 'ri-lg', 'text-green-700' => $isCartEmpty])></i>
             </button>
         </div>
     </div>
