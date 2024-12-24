@@ -69,8 +69,24 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
+    public function ManajemenMenu(){
+        return view('admin.menu');
+    }
+
+    public function ManajemenPesanan(){
+        return view('admin.pesanan');
+    }
+
+    public function ManajemenPengguna(){
+        return view('admin.pengguna');
+    }
+
+    public function Informasi(){
+        return view('admin.info');
+    }
+
     public function logout()
     {
-        return redirect()->route('admin.login');
+        return redirect()->route('loginAdmin');
     }
 }

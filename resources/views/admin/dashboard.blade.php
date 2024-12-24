@@ -85,22 +85,22 @@
                                     </div>
 
                                     <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">Cecep Surya Irawan</div>
+                                        <div class="text-sm leading-5 text-gray-500">cecep@gmail.com</div>
                                     </div>
                                 </div>
                             </td>
                             
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
+                                <div class="text-sm leading-5 text-gray-900">Regular Costumer</div>
+                                {{-- <div class="text-sm leading-5 text-gray-500">Web dev</div> --}}
                             </td>
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Owner</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">User</td>
 
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -114,22 +114,22 @@
                                     </div>
 
                                     <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">Mamat Hidayat</div>
+                                        <div class="text-sm leading-5 text-gray-500">mamat@gmail.com</div>
                                     </div>
                                 </div>
                             </td>
                             
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
+                                <div class="text-sm leading-5 text-gray-900">Regular Costumer</div>
+                                {{-- <div class="text-sm leading-5 text-gray-500">Web dev</div> --}}
                             </td>
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Owner</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">User</td>
 
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -143,22 +143,22 @@
                                     </div>
 
                                     <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">Teguh Santoso</div>
+                                        <div class="text-sm leading-5 text-gray-500">teguh@gmail.com</div>
                                     </div>
                                 </div>
                             </td>
                             
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
+                                <div class="text-sm leading-5 text-gray-900">New Costumer</div>
+                                {{-- <div class="text-sm leading-5 text-gray-500">Web dev</div> --}}
                             </td>
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Owner</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">User</td>
 
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -172,22 +172,22 @@
                                     </div>
 
                                     <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">Dewi Sari</div>
+                                        <div class="text-sm leading-5 text-gray-500">dewi@gmail.com</div>
                                     </div>
                                 </div>
                             </td>
                             
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
+                                <div class="text-sm leading-5 text-gray-900">VIP Costumer</div>
+                                {{-- <div class="text-sm leading-5 text-gray-500">Web dev</div> --}}
                             </td>
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Owner</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">User</td>
 
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -201,22 +201,22 @@
                                     </div>
 
                                     <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">Ayu Putri Lestari</div>
+                                        <div class="text-sm leading-5 text-gray-500">ayu@gmail.com</div>
                                     </div>
                                 </div>
                             </td>
                             
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
+                                <div class="text-sm leading-5 text-gray-900">New Costumer</div>
+                                {{-- <div class="text-sm leading-5 text-gray-500">Web dev</div> --}}
                             </td>
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Owner</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">User</td>
 
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -230,22 +230,22 @@
                                     </div>
 
                                     <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">Budi Santoso</div>
+                                        <div class="text-sm leading-5 text-gray-500">budi@gmail.com</div>
                                     </div>
                                 </div>
                             </td>
                             
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
+                                <div class="text-sm leading-5 text-gray-900">Gold Member</div>
+                                {{-- <div class="text-sm leading-5 text-gray-500">Web dev</div> --}}
                             </td>
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Owner</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">User</td>
 
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -259,22 +259,22 @@
                                     </div>
 
                                     <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">Hendra Saputra</div>
+                                        <div class="text-sm leading-5 text-gray-500">hendra@gmail.com</div>
                                     </div>
                                 </div>
                             </td>
                             
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
+                                <div class="text-sm leading-5 text-gray-900">Regular Costumer</div>
+                                {{-- <div class="text-sm leading-5 text-gray-500">Web dev</div> --}}
                             </td>
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Owner</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">User</td>
 
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -288,22 +288,22 @@
                                     </div>
 
                                     <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
+                                        <div class="text-sm leading-5 font-medium text-gray-900">Andi Hidayat</div>
+                                        <div class="text-sm leading-5 text-gray-500">andi@gmail.com</div>
                                     </div>
                                 </div>
                             </td>
                             
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
+                                <div class="text-sm leading-5 text-gray-900">VIP Costumer</div>
+                                {{-- <div class="text-sm leading-5 text-gray-500">Web dev</div> --}}
                             </td>
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Owner</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">User</td>
 
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
