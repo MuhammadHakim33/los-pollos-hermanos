@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->integer('total');
             $table->enum('status', ['failed', 'pending', 'success'])->default('pending');
+            $table->char('snap_token')->nullable();
             $table->timestamps();
         });
 
