@@ -9,8 +9,8 @@ class ItemOrder extends Model
     protected $table = 'item_order';
 
     protected $fillable = [
-        'id_order',
-        'id_menu',
+        'order_id',
+        'menu_id',
         'qty',
         'price',
         'created_at',
@@ -19,6 +19,11 @@ class ItemOrder extends Model
 
     public function menu()
     {
-        return $this->belongsTo(Menu::class, 'id_menu');
+        return $this->belongsTo(Menu::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }

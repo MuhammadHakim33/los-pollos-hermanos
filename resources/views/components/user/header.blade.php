@@ -1,7 +1,12 @@
+@php
+    $isCartEmpty = count($carts) > 0 ? true : false ;
+@endphp
+
+
 <header class="bg-white sticky top-0 inset-x-0 border-b shadow-sm z-10">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
         <div class="flex items-center">
-            <img alt="Selera Panca Logo" class="h-20 rounded-xl" src="{{ asset('images/Logo RM. Selera Panca.png') }}" />
+            <img alt="Selera Panca Logo" class="h-14 rounded-xl" src="{{ asset('images/Logo RM. Selera Panca.png') }}" />
         </div>
         <div class="flex items-center gap-x-4">
         @auth
@@ -59,13 +64,11 @@
                 class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-gray-200 hover:bg-gray-300 focus:outline-none focus:bg-gray-300 disabled:pointer-events-none">
                 Register
             </a>
-        @endguest
-        <button type="button"
-            class="flex shrink-0 justify-center items-center gap-2 size-[38px] text-sm font-medium rounded-lg border hover:bg-gray-100 focus:bg-gray-100"
-            aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-cart" data-hs-overlay="#modal-cart">
-            <i class="ri-shopping-basket-line ri-lg"></i>
-        </button>
-    </div>
+            @endguest
+            <button type="button" @class(['flex','shrink-0','justify-center','items-center','gap-2','size-[38px]','text-sm','font-medium','rounded-lg','border', 'border-green-700' => $isCartEmpty, 'hover:bg-gray-100','focus:bg-gray-100']) aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-cart" data-hs-overlay="#modal-cart">
+                <i @class(['ri-shopping-basket-line', 'ri-lg', 'text-green-700' => $isCartEmpty])></i>
+            </button>
+        </div>
     </div>
 </header>
 
@@ -85,6 +88,7 @@
             </div>
             <div class="p-4 overflow-y-auto">
                 @auth
+<<<<<<< HEAD:resources/views/user/partials/header.blade.php
                     <ul class="flex flex-col divide-y divide-gray-200">
                         @if ($carts->count())
                             @foreach ($carts as $item)
@@ -138,12 +142,59 @@
                             <li class="mx-auto italic text-gray-500">Pilih Menu</li>
                         @endif
                     </ul>
+=======
+                <ul class="flex flex-col divide-y divide-gray-200">
+                    @if($carts->count())
+                    @foreach ($carts as $item)
+                    <li class="inline-flex items-center gap-x-2 py-3 text-sm text-gray-800">
+                        <div class="inline-block bg-white mr-1" data-hs-input-number='{"min":1}'>
+                            <div class="flex items-center gap-x-1.5">
+                                <!-- DELETE -->
+                                <form action="/cart/{{ $item->rowId }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="size-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                                        <i class="ri-delete-bin-7-line"></i>
+                                    </button>
+                                </form>
+                                <!-- DECREASE -->
+                                <form action="/cart/{{ $item->rowId }}/decrease" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <input type="text" name="qty" value="{{ $item->qty }}" readonly hidden>
+                                    <button type="submit" class="size-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" @disabled($item->qty == 1)>
+                                        <i class="ri-subtract-fill ri-lg"></i>
+                                    </button>
+                                </form>
+                                <!-- QUANTITY -->
+                                <input class="p-0 w-4 bg-transparent border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" style="-moz-appearance: textfield;" type="number" value="{{ $item->qty }}">
+                                <!-- INCREASE -->
+                                <form action="/cart/{{ $item->rowId }}/increase" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <input type="text" name="qty" value="{{ $item->qty }}" readonly hidden>
+                                    <button type="submit" class="size-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                                        <i class="ri-add-fill ri-lg"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <p>{{ $item->name }}</p>
+                        <p class="ml-auto">{{ number_format($item->total) }}</p>
+                    </li>
+                    @endforeach
+                    @else
+                    <li class="mx-auto italic text-gray-500">Pilih Menu</li>
+                    @endif
+                </ul>
+>>>>>>> 8dbca89634524f954f85979769872191355513bb:resources/views/components/user/header.blade.php
                 @endauth
                 @guest
                     <p class="text-center italic text-gray-500">Login untuk melihat isi keranjang</p>
                 @endguest
             </div>
             @auth
+<<<<<<< HEAD:resources/views/user/partials/header.blade.php
                 @if ($carts->count())
                     <div class="bg-gray-50 py-3 px-4 border-t">
                         <div class="flex justify-between mb-4">
@@ -154,6 +205,17 @@
                             href="/checkout">Pesan</a>
                     </div>
                 @endif
+=======
+            @if($carts->count())
+            <div class="bg-gray-50 py-3 px-4 border-t">
+                <div class="flex justify-between mb-4">
+                    <h3 class="font-medium">Total Harga</h3>
+                    <p class="font-medium">Rp {{ number_format($total) }}</p>
+                </div>
+                <a class="block py-2 px-3 w-full text-sm text-center font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="/checkout">Pesan</a>
+            </div>
+            @endif
+>>>>>>> 8dbca89634524f954f85979769872191355513bb:resources/views/components/user/header.blade.php
             @endauth
         </div>
     </div>

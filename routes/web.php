@@ -4,9 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\EnsureCartFilled;
-
+use App\Http\Middleware\EnsurePaymentStatusNotPending;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -16,34 +16,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/cart/{id}/decrease', [CartController::class, 'decrease']);
     Route::put('/cart/{id}/increase', [CartController::class, 'increase']);
 
-    Route::get('/checkout', [OrderController::class, 'checkout'])->middleware(EnsureCartFilled::class);
-    Route::post('/checkout', [OrderController::class, 'order'])->middleware(EnsureCartFilled::class);
-    Route::get('/order/{order}', [OrderController::class, 'detail']);
-
-    Route::get('/profile', [ProfileController::class, 'edit']);
+    Route::get('/checkout', [TransactionController::class, 'create'])->middleware(EnsureCartFilled::class);
+    Route::post('/checkout', [TransactionController::class, 'store'])->middleware(EnsureCartFilled::class);
+    Route::get('/payment/{order:snap_token}', [TransactionController::class, 'payment'])->middleware(EnsurePaymentStatusNotPending::class);
+    Route::put('/order/{order}/approve', [TransactionController::class, 'approve']);
+    Route::put('/order/{order}/failed', [TransactionController::class, 'failed']);
+    Route::get('/order/{order}/detail', [TransactionController::class, 'show']);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Route::get('/index', function () {
-//     return view('user.home.index'); // Sesuaikan dengan tampilan yang diinginkan
-// })->name('index');
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -54,7 +33,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
 
 require __DIR__.'/auth.php';

@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('order-user', function (User $user, Order $order) {
-            return $user->id === $order->id_user;
+            return $user->id === $order->user_id;
         });
     }
 }

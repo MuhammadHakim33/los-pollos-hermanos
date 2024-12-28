@@ -9,24 +9,21 @@ use App\Observers\OrderObserver;
 #[ObservedBy(OrderObserver::class)]
 class Order extends Model
 {
-    protected $table = 'orders';
-
     public $incrementing = false;
 
     protected $fillable = [
-        'id',
-        'id_user',
+        'user_id',
         'total',
         'status'
     ];
 
     public function delivery()
     {
-        return $this->hasOne(Delivery::class, 'id_order');
+        return $this->hasOne(Delivery::class);
     }
 
-    public function itemOrder()
+    public function items()
     {
-        return $this->hasMany(ItemOrder::class, 'id_order');
+        return $this->hasMany(ItemOrder::class);
     }
 }

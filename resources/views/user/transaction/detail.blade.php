@@ -1,16 +1,45 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery</title>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen border">
-    <div class="bg-white rounded p-6 mx-4 w-full max-w-3xl ">
+<x-user-layout>
+    <div class="bg-white rounded p-6 w-full max-w-3xl mt-10 mx-auto">
+        @if($order->status == 'pending')
+        <div class="mb-6 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-actions-label">
+            <div class="flex">
+                <div class="shrink-0">
+                    <i class="ri-information-line ri-lg"></i>
+                </div>
+                <div class="ms-3">
+                    <h3 id="hs-actions-label" class="font-semibold">Kamu Belum Melakukan Pemabayaran</h3>
+                    <div class="mt-1 text-sm text-yellow-800">Segera selesaikan pembayaran agar pesanan bisa di proses.</div>
+                    <div class="mt-4">
+                        <a href="/payment/{{ $order->snap_token }}" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-yellow-600 hover:text-yellow-800 focus:outline-none focus:text-yellow-800 disabled:opacity-50 disabled:pointer-events-none">Bayar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @elseif($order->status == 'success')
+        <div class="mb-6 bg-green-50 border border-green-200 text-green-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-actions-label">
+            <div class="flex">
+                <div class="shrink-0">
+                    <i class="ri-checkbox-circle-line ri-lg"></i>
+                </div>
+                <div class="ms-3">
+                    <h3 id="hs-actions-label" class="font-semibold">Pembayaran Selesai</h3>
+                    <div class="mt-1 text-sm text-green-800">Pesananmu akan segera kami proses, mohon tunggu</div>
+                </div>
+            </div>
+        </div>
+        @elseif($order->status == 'failed')
+        <div class="mb-6 bg-red-50 border border-red-200 text-red-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-actions-label">
+            <div class="flex">
+                <div class="shrink-0">
+                    <i class="ri-close-circle-line ri-lg"></i>
+                </div>
+                <div class="ms-3">
+                    <h3 id="hs-actions-label" class="font-semibold">Gagal Memesan</h3>
+                    <div class="mt-1 text-sm text-red-800">Mohon hubungi kami atau ulangi proses pemesanan</div>
+                </div>
+            </div>
+        </div>
+        @endif
         <div class="mb-4 text-center">
             <h1 class="text-2xl font-semibold">{{ $order->id }}</h1>
             <p class="text-gray-500">{{ $order->created_at }}</p>
@@ -65,17 +94,14 @@
         <!-- End Stepper -->
         <div class="border-t border-gray-200 py-4">
             <h2 class="text-gray-700 font-semibold mb-2">Order Detail</h2>
-            @foreach ($order->itemOrder as $item)
+            @foreach ($order->items as $item)
                 <div class="flex items-center mb-2">
                     <h3 class="text-gray-500 font-medium flex-1">{{ '('.$item->qty.') '.$item->menu->name }}</h3>
-                    <p class="text-gray-500 font-medium">{{ 'Rp'.$item->price }}</p>
+                    <p class="text-gray-500 font-medium">Rp {{ number_format($item->price) }}</p>
                 </div>
             @endforeach
         </div>
         <div class="border-t border-gray-200 pt-4">
-            <div class="mb-2 text-center bg-blue-400/10 border border-blue-400 p-4 rounded">
-                <h4 class="font-semibold text-blue-500">MENUNGGU PEMBAYARAN</h4>
-            </div>
             <h2 class="text-gray-700 font-semibold mb-2">Rincian Pembayaran</h2>
             <div class="flex justify-between mb-2">
                 <span class="text-gray-500">Metode Pembayaran</span>
@@ -83,14 +109,13 @@
             </div>
             <div class="flex justify-between mb-2">
                 <span class="text-gray-500">Subtotal</span>
-                <span class="text-gray-700">{{ 'Rp'.$order->total }}</span>
+                <span class="text-gray-700">Rp {{ number_format($order->total) }}</span>
             </div>
             <div class="border-t border-gray-200 my-2"></div>
             <div class="flex justify-between mt-4">
                 <span class="text-gray-700 font-semibold">Total</span>
-                <span class="text-gray-700 font-semibold">{{ 'Rp'.$order->total }}</span>
+                <span class="text-gray-700 font-semibold">Rp {{ number_format($order->total) }}</span>
             </div>
         </div>
     </div>
-</body>
-</html>
+</x-user-layout>

@@ -9,12 +9,15 @@ class Delivery extends Model
 {
     use HasUlids;
 
-    protected $table = 'delivery';
-
     public $incrementing = false;
 
     protected $fillable = [
-        'id_order',
+        'order_id',
         'status',
     ];
+
+    public function address()
+    {
+        return $this->hasOne(DeliveryAddress::class);
+    }
 }
