@@ -1,18 +1,16 @@
 <x-user-layout>
-    <div class="bg-white rounded p-6 w-full max-w-3xl mt-10 mx-auto">
+    <div class="rounded w-full max-w-xl mt-10 mx-auto px-2">
         @if($order->status == 'pending')
-        <div class="mb-6 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-actions-label">
-            <div class="flex">
+        <div class="mb-6 bg-yellow-50 border border-yellow-800 text-yellow-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-actions-label">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-3">
                 <div class="shrink-0">
-                    <i class="ri-information-line ri-lg"></i>
+                    <i class="ri-information-line ri-xl"></i>
                 </div>
-                <div class="ms-3">
-                    <h3 id="hs-actions-label" class="font-semibold">Kamu Belum Melakukan Pemabayaran</h3>
-                    <div class="mt-1 text-sm text-yellow-800">Segera selesaikan pembayaran agar pesanan bisa di proses.</div>
-                    <div class="mt-4">
-                        <a href="/payment/{{ $order->snap_token }}" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-yellow-600 hover:text-yellow-800 focus:outline-none focus:text-yellow-800 disabled:opacity-50 disabled:pointer-events-none">Bayar</a>
-                    </div>
+                <div class="grow">
+                    <h2 id="hs-actions-label" class="font-semibold">Kamu Belum Melakukan Pemabayaran</h2>
+                    <div class="text-sm text-yellow-800">Segera selesaikan pembayaran agar pesanan bisa di proses.</div>
                 </div>
+                <button type="button" id="pay-button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-yellow-700 text-white hover:bg-yellow-800 focus:outline-none focus:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none">Bayar</button>
             </div>
         </div>
         @elseif($order->status == 'success')
@@ -22,8 +20,8 @@
                     <i class="ri-checkbox-circle-line ri-lg"></i>
                 </div>
                 <div class="ms-3">
-                    <h3 id="hs-actions-label" class="font-semibold">Pembayaran Selesai</h3>
-                    <div class="mt-1 text-sm text-green-800">Pesananmu akan segera kami proses, mohon tunggu</div>
+                    <h2 id="hs-actions-label" class="font-semibold">Pembayaran Selesai</h2>
+                    <div class="text-sm text-green-800">Pesananmu akan segera kami proses, mohon tunggu</div>
                 </div>
             </div>
         </div>
@@ -34,12 +32,15 @@
                     <i class="ri-close-circle-line ri-lg"></i>
                 </div>
                 <div class="ms-3">
-                    <h3 id="hs-actions-label" class="font-semibold">Gagal Memesan</h3>
-                    <div class="mt-1 text-sm text-red-800">Mohon hubungi kami atau ulangi proses pemesanan</div>
+                    <h2 id="hs-actions-label" class="font-semibold">Gagal Memesan</h2>
+                    <div class="text-sm text-red-800">Mohon hubungi kami atau ulangi proses pemesanan</div>
                 </div>
             </div>
         </div>
         @endif
+    </div>
+
+    <div class="bg-white rounded p-6 w-full max-w-xl mt-10 mx-auto">
         <div class="mb-4 text-center">
             <h1 class="text-2xl font-semibold">{{ $order->id }}</h1>
             <p class="text-gray-500">{{ $order->created_at }}</p>
@@ -104,10 +105,6 @@
         <div class="border-t border-gray-200 pt-4">
             <h2 class="text-gray-700 font-semibold mb-2">Rincian Pembayaran</h2>
             <div class="flex justify-between mb-2">
-                <span class="text-gray-500">Metode Pembayaran</span>
-                <span class="text-gray-700">COD</span>
-            </div>
-            <div class="flex justify-between mb-2">
                 <span class="text-gray-500">Subtotal</span>
                 <span class="text-gray-700">Rp {{ number_format($order->total) }}</span>
             </div>
@@ -118,4 +115,28 @@
             </div>
         </div>
     </div>
+
+    <div class="w-full max-w-xl mt-10 mx-auto">
+        <a href="/" type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Kembali</a>
+    </div>
+
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.clientKey') }}"></script>
+
+    <script type="text/javascript">
+        var payButton = document.getElementById('pay-button');
+        
+        payButton.addEventListener('click', function () {
+            window.snap.pay('{{ $order->snap_token }}', {
+                onSuccess: function(result){
+                    window.location.reload();
+                },
+                onPending: function(result){
+                    window.location.reload();
+                },
+                onError: function(result){
+                    window.location.reload();
+                },
+            });
+        });
+    </script>
 </x-user-layout>
