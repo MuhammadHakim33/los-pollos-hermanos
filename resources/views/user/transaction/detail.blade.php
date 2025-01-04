@@ -1,42 +1,50 @@
 <x-user-layout>
     <div class="rounded w-full max-w-xl mt-10 mx-auto px-2">
         @if($order->status == 'pending')
-        <div class="mb-6 bg-yellow-50 border border-yellow-800 text-yellow-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-actions-label">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-3">
-                <div class="shrink-0">
-                    <i class="ri-information-line ri-xl"></i>
-                </div>
-                <div class="grow">
-                    <h2 id="hs-actions-label" class="font-semibold">Kamu Belum Melakukan Pemabayaran</h2>
-                    <div class="text-sm text-yellow-800">Segera selesaikan pembayaran agar pesanan bisa di proses.</div>
-                </div>
-                <button type="button" id="pay-button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-yellow-700 text-white hover:bg-yellow-800 focus:outline-none focus:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none">Bayar</button>
-            </div>
-        </div>
+        <x-payment-alert class="bg-yellow-50 border-yellow-800 text-yellow-800">
+            <x-payment-alert.icon>
+                <i class="ri-information-line ri-xl"></i>
+            </x-payment-alert.icon>
+            <x-payment-alert.message>
+                <x-payment-alert.message.title>
+                    Kamu Belum Melakukan Pemabayaran
+                </x-payment-alert.message.title>
+                <x-payment-alert.message.sub-title>
+                    Segera selesaikan pembayaran agar pesanan bisa di proses.
+                </x-payment-alert.message.sub-title>
+            </x-payment-alert.message>
+            <x-payment-alert.button class="bg-yellow-700 text-white hover:bg-yellow-800 focus:bg-yellow-700">
+                Bayar
+            </x-payment-alert.button>
+        </x-payment-alert>
         @elseif($order->status == 'success')
-        <div class="mb-6 bg-green-50 border border-green-200 text-green-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-actions-label">
-            <div class="flex">
-                <div class="shrink-0">
-                    <i class="ri-checkbox-circle-line ri-lg"></i>
-                </div>
-                <div class="ms-3">
-                    <h2 id="hs-actions-label" class="font-semibold">Pembayaran Selesai</h2>
-                    <div class="text-sm text-green-800">Pesananmu akan segera kami proses, mohon tunggu</div>
-                </div>
-            </div>
-        </div>
+        <x-payment-alert class="bg-green-50 border-green-800 text-green-800">
+            <x-payment-alert.icon>
+                <i class="ri-checkbox-circle-line ri-xl"></i>
+            </x-payment-alert.icon>
+            <x-payment-alert.message>
+                <x-payment-alert.message.title>
+                    Pembayaran Selesai
+                </x-payment-alert.message.title>
+                <x-payment-alert.message.sub-title>
+                    Pesananmu akan segera kami proses, mohon tunggu
+                </x-payment-alert.message.sub-title>
+            </x-payment-alert.message>
+        </x-payment-alert>
         @elseif($order->status == 'failed')
-        <div class="mb-6 bg-red-50 border border-red-200 text-red-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-actions-label">
-            <div class="flex">
-                <div class="shrink-0">
-                    <i class="ri-close-circle-line ri-lg"></i>
-                </div>
-                <div class="ms-3">
-                    <h2 id="hs-actions-label" class="font-semibold">Gagal Memesan</h2>
-                    <div class="text-sm text-red-800">Mohon hubungi kami atau ulangi proses pemesanan</div>
-                </div>
-            </div>
-        </div>
+        <x-payment-alert class="bg-red-50 border-red-800 text-red-800">
+            <x-payment-alert.icon>
+                <i class="ri-close-circle-line ri-xl"></i>
+            </x-payment-alert.icon>
+            <x-payment-alert.message>
+                <x-payment-alert.message.title>
+                    Pembayaran Gagal
+                </x-payment-alert.message.title>
+                <x-payment-alert.message.sub-title>
+                    Mohon hubungi kami atau ulangi proses pemesanan
+                </x-payment-alert.message.sub-title>
+            </x-payment-alert.message>
+        </x-payment-alert>
         @endif
     </div>
 
