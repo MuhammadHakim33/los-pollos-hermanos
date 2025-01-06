@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Middleware\User;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\AdminGuest;
 use App\Http\Middleware\EnsureCartFilled;
@@ -13,18 +14,20 @@ use App\Http\Middleware\EnsurePaymentStatusNotPending;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::post('/cart', [CartController::class, 'store']);
-    Route::delete('/cart/{id}', [CartController::class, 'destroy']);
-    Route::put('/cart/{id}/decrease', [CartController::class, 'decrease']);
-    Route::put('/cart/{id}/increase', [CartController::class, 'increase']);
+Route::middleware(User::class)->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::post('/cart', [CartController::class, 'store']);
+        Route::delete('/cart/{id}', [CartController::class, 'destroy']);
+        Route::put('/cart/{id}/decrease', [CartController::class, 'decrease']);
+        Route::put('/cart/{id}/increase', [CartController::class, 'increase']);
 
-    Route::get('/checkout', [TransactionController::class, 'create'])->middleware(EnsureCartFilled::class);
-    Route::post('/checkout', [TransactionController::class, 'store'])->middleware(EnsureCartFilled::class);
-    Route::get('/payment/{order:snap_token}', [TransactionController::class, 'payment'])->middleware(EnsurePaymentStatusNotPending::class);
-    Route::put('/order/{order}/approve', [TransactionController::class, 'approve']);
-    Route::put('/order/{order}/failed', [TransactionController::class, 'failed']);
-    Route::get('/order/{order}/detail', [TransactionController::class, 'show']);
+        Route::get('/checkout', [TransactionController::class, 'create'])->middleware(EnsureCartFilled::class);
+        Route::post('/checkout', [TransactionController::class, 'store'])->middleware(EnsureCartFilled::class);
+        Route::get('/payment/{order:snap_token}', [TransactionController::class, 'payment'])->middleware(EnsurePaymentStatusNotPending::class);
+        Route::put('/order/{order}/approve', [TransactionController::class, 'approve']);
+        Route::put('/order/{order}/failed', [TransactionController::class, 'failed']);
+        Route::get('/order/{order}/detail', [TransactionController::class, 'show']);
+    });
 });
 
 // Admin
