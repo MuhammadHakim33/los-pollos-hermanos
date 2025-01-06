@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\AdminGuest;
 use App\Http\Middleware\EnsureCartFilled;
 use App\Http\Middleware\EnsurePaymentStatusNotPending;
 
@@ -38,17 +40,22 @@ Route::middleware('auth')->group(function () {
 //     });
 // });
 
-Route::get('/admin/login', [AdminController::class, 'showLoginFormAdmin'])->name('showLoginFormAdmin');
-Route::post('/admin/login', [AdminController::class, 'login'])->name('loginAdmin');
-Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
-Route::get('/admin/menu', [AdminController::class, 'ManajemenMenu'])->name('admin.menu');
-Route::delete('/admin/menu', [AdminController::class, 'HapusMenu']);
-Route::get('/admin/pesanan', [AdminController::class, 'AdminDashboard'])->name('admin.pesanan');
-Route::get('/admin/register', [AdminController::class, 'showRegistrationFormAdmin'])->name('showRegistrationFormAdmin');
-Route::post('/admin/register', [AdminController::class, 'register'])->name('admin.register');
-Route::post('/admin/logout', [AdminController::class, 'logout'])->name('login');
+Route::middleware(AdminGuest::class)->group(function () {
+    Route::get('/admin/register', [AdminController::class, 'showRegistrationFormAdmin'])->name('showRegistrationFormAdmin');
+    Route::post('/admin/register', [AdminController::class, 'register'])->name('admin.register');
+    Route::get('/admin/login', [AdminController::class, 'showLoginFormAdmin'])->name('showLoginFormAdmin');
+    Route::post('/admin/login', [AdminController::class, 'login'])->name('loginAdmin');
+});
 
 
+Route::middleware(Admin::class)->group(function () {
+    Route::post('/admin/logout', [AdminController::class, 'logout'])->name('login');
+
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/menu', [AdminController::class, 'ManajemenMenu'])->name('admin.menu');
+    Route::delete('/admin/menu', [AdminController::class, 'HapusMenu']);
+    Route::get('/admin/pesanan', [AdminController::class, 'AdminDashboard'])->name('admin.pesanan');
+});
 
 
 
