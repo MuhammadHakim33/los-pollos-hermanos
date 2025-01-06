@@ -10,7 +10,7 @@
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Nama Menu</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Deskripsi</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Harga</th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Tambah Menu</a>
                             </th>
                         </tr>
@@ -29,14 +29,22 @@
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 font-semibold">{{ $item->name }}</td>
 
                             <!-- Kolom Deskripsi -->
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $item->description }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $item->desc }}</td>
 
                             <!-- Kolom Harga -->
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
+                            <td class="py-4 whitespace-no-wrap border-b border-gray-200">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
 
                             <!-- Kolom Aksi -->
-                            <td class="px-4 py-2 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <td class="px-4 py-10 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium flex gap-1">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
+                                <form class="" action="#" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="text" value="{{ $item->id }}" name="id" hidden>
+                                    <button type="submit" class="text-red-500 hover:text-red-800">
+                                        Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -54,14 +62,22 @@
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 font-semibold">{{ $item->name }}</td>
 
                             <!-- Kolom Deskripsi -->
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $item->description }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ $item->desc }}</td>
 
                             <!-- Kolom Harga -->
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
+                            <td class="py-4 whitespace-no-wrap border-b border-gray-200">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
 
                             <!-- Kolom Edit -->
-                            <td class="px-4 py-2 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <td class="px-4 py-10 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium flex gap-1">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
+                                <form class="" action="#" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="text" value="{{ $item->id }}" name="id" hidden>
+                                    <button type="submit" class="text-red-500 hover:text-red-800">
+                                        Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

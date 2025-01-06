@@ -86,6 +86,14 @@ class AdminController extends Controller
         ]);
     }
 
+    public function HapusMenu(Request $request)
+    {
+        $id = $request->id;
+        $menu = Menu::find($id);
+        $menu->delete();
+        return redirect()->back();
+    }
+
     public function logout()
     {
         return redirect()->route('loginAdmin');
