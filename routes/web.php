@@ -49,7 +49,7 @@ Route::middleware(AdminGuest::class)->group(function () {
 
 
 Route::middleware(Admin::class)->group(function () {
-    Route::post('/admin/logout', [AdminController::class, 'logout'])->name('login');
+    Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
     Route::get('/admin/menu', [AdminController::class, 'ManajemenMenu'])->name('admin.menu');
