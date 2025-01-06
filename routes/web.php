@@ -38,14 +38,14 @@ Route::middleware('auth')->group(function () {
 //     });
 // });
 
-Route::get('/admin/login', [AdminController::class, 'showLoginFormAdmin'])->name('loginAdmin');
+Route::get('/admin/login', [AdminController::class, 'showLoginFormAdmin'])->name('showLoginFormAdmin');
 Route::post('/admin/login', [AdminController::class, 'login'])->name('loginAdmin');
 Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 Route::get('/admin/menu', [AdminController::class, 'ManajemenMenu'])->name('admin.menu');
 Route::delete('/admin/menu', [AdminController::class, 'HapusMenu']);
 Route::get('/admin/pesanan', [AdminController::class, 'AdminDashboard'])->name('admin.pesanan');
-Route::get('/admin/register', [AdminController::class, 'showRegistrationFormAdmin'])->name('registerAdmin');
-Route::post('/admin/register', [AdminController::class, 'showRegistrationFormAdmin'])->name('registerAdmin');
+Route::get('/admin/register', [AdminController::class, 'showRegistrationFormAdmin'])->name('showRegistrationFormAdmin');
+Route::post('/admin/register', [AdminController::class, 'register'])->name('admin.register');
 Route::post('/admin/logout', [AdminController::class, 'logout'])->name('login');
 
 
