@@ -11,9 +11,19 @@ $isCartEmpty = count($carts) > 0 ? true : false ;
         <div class="flex items-center gap-x-4">
             @auth
             @if (Auth::user()->role == 'user')
-            <div class="hs-dropdown relative inline-flex">
-                <button id="hs-dropdown-unstyled" type="button" class="text-sm py-2 px-3 hs-dropdown-toggle inline-flex justify-center items-center gap-x-2 border border-gray-200 text-gray-500 hover:border-blue-600 hover:text-blue-600 focus:outline-none focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none" aria-expanded="false" aria-label="Menu">
-                    {{Auth::user()->name}}
+            <div class="hs-dropdown relative [--strategy:absolute] inline-flex">
+                <button id="hs-dropdown-custom-trigger" type="button"
+                    class="hs-dropdown-toggle py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                    aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                    <img class="w-8 h-auto rounded-full"
+                        src="https://media.licdn.com/dms/image/v2/C5603AQGWIgMyNHr8eA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1638627030965?e=2147483647&v=beta&t=T7Jh2J2rPQCGhKqxxJgE8Ssf0XkpaVLsX1FMaCHdcqI"
+                        alt="Avatar">
+                    <span class="text-gray-600 font-medium truncate max-w-[8rem]">{{ Auth::user()->name }}</span>
+                    <svg class="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
                 </button>
 
                 <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden z-10 top-0 lg:start-auto lg:end-0 min-w-[250px] bg-white shadow-md rounded-lg mt-2 border border-gray-200"
