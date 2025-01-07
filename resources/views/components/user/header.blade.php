@@ -43,7 +43,7 @@ $isCartEmpty = count($carts) > 0 ? true : false ;
                         <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" href="/profile">
                             <i class="ri-user-3-line"></i> My Profile <i class="ri-arrow-right-wide-fill ml-auto"></i>
                         </a>
-                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" href="#">
+                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" href="/order/history">
                             <i class="ri-shopping-basket-line"></i> Purchases <i class="ri-arrow-right-wide-fill ml-auto"></i>                                
                         </a>
                         <form action="{{ route('logout') }}" method="post" class="flex">

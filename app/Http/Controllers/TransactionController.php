@@ -115,4 +115,19 @@ class TransactionController extends Controller
 
         return view('user.transaction.detail', ['order' => $order ]);
     }
+
+    public function history()
+    {
+        $orders = Order::with(['delivery', 'items'])
+                ->where('user_id', auth()->user()->id)
+                ->orderBy('created_at', 'desc')->get();
+        $carts = Cart::instance(auth()->user()->email)->content();
+        $total = Cart::priceTotal();
+        
+        return view('user.transaction.history',  [
+            'orders' => $orders,
+            'carts' => $carts,
+            'total' => $total,
+        ]);
+    }
 }

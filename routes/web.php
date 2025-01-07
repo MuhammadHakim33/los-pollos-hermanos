@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/checkout', [TransactionController::class, 'create'])->middleware(EnsureCartFilled::class);
     Route::post('/checkout', [TransactionController::class, 'store'])->middleware(EnsureCartFilled::class);
+    Route::get('/order/history', [TransactionController::class, 'history']);
     Route::get('/order/{order}', [TransactionController::class, 'show']);
 });
 
