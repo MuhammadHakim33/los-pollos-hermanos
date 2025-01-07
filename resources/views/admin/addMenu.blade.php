@@ -114,42 +114,41 @@
         <div class="table-container mt-8">
         <form action="/admin/addMenu" method="POST" enctype="multipart/form-data">
           <!-- CSRF Token -->
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          @csrf
           
           <div data-hs-file-upload='{
             "url": "/upload",
             "maxFiles": 1,
             "singleton": true
           }'>
-          <label for="gambar">Gambar</label>
-            <template data-hs-file-upload-preview="">
-              <div class="flex items-center w-full">
-                <span class="grow-0 overflow-hidden truncate" data-hs-file-upload-file-name=""></span>
-                <span class="grow-0">.</span>
-                <span class="grow-0" data-hs-file-upload-file-ext=""></span>
-              </div>
-            </template>
-          
-            <button type="button" class="relative flex w-full border overflow-hidden border-gray-200 shadow-sm rounded-lg text-sm focus:outline-none focus:z-10 focus:border-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:border-neutral-600">
-              <span class="h-full py-3 px-4 bg-gray-100 text-nowrap dark:bg-neutral-800">Choose File</span>
-              <span class="group grow flex overflow-hidden h-full py-3 px-4" data-hs-file-upload-previews="">
-                <span class="group-has-[div]:hidden">No Chosen File</span>
-              </span>
-              <span class="absolute top-0 left-0 w-full h-full" data-hs-file-upload-trigger=""></span>
-            </button>
-          </div>
-          
-          <div>
-            <label for="nama_menu">Nama Menu</label>
-            <input type="text" id="nama_menu" name="nama_menu" placeholder="Masukkan nama menu" required>
+          <label for="path_img">Gambar</label>
+          <input id="path_img" name="gambar" type="file" required />
           </div>
           <div>
-            <label for="deskripsi">Deskripsi</label>
-            <textarea id="deskripsi" name="deskripsi" placeholder="Masukkan deskripsi menu" required></textarea>
+            <label for="name">Nama Menu</label>
+            <input type="text" id="name" name="nama_menu" placeholder="Masukkan nama menu" required>
           </div>
           <div>
-            <label for="harga">Harga</label>
-            <input type="number" id="harga" name="harga" placeholder="Masukkan harga menu" required>
+            <label for="category">Category</label>
+            <select class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" name="category" id="category">
+              <option value="food">Makanan</option>
+              <option value="drink">Minuman</option>
+            </select>
+          </div>
+          <div>
+            <label for="status">Status</label>
+            <select class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" name="status" id="status">
+              <option value="available">Available</option>
+              <option value="empty">Empty</option>
+            </select>
+          </div>
+          <div>
+            <label for="desc">Deskripsi</label>
+            <textarea id="desc" name="deskripsi" placeholder="Masukkan deskripsi menu" required></textarea>
+          </div>
+          <div>
+            <label for="price">Harga</label>
+            <input type="number" id="price" name="harga" placeholder="Masukkan harga menu" required>
           </div>
           <button type="submit" class="btn-submit">Simpan</button>
         </form>

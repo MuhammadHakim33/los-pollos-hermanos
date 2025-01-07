@@ -38,7 +38,31 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'gambar' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'nama_menu' => ['required'],
+            'deskripsi' => ['required'],
+            'harga' => ['required', 'numeric'],
+            'status' => ['required'],
+            'category' => ['required'],
+        ]);
+
+        $fileName = null;
+        if ($request->hasFile('gambar')) {
+            $fileName = time() . '.' . $request->gambar->extension();
+            $request->gambar->move(public_path('uploads'), $fileName);
+        }
+
+        Menu::create([
+            'path_img' => $fileName,
+            'name' => $request->nama_menu,
+            'desc' => $request->deskripsi,
+            'price' => $request->harga,
+            'status' => $request->status,
+            'category' => $request->category,
+        ]);
+
+        return redirect()->route('admin.menu');
     }
 
     /**
