@@ -11,7 +11,7 @@
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Deskripsi</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Harga</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Tambah Menu</a>
+                                <a href="{{url('/admin/addMenu')}}" class="text-indigo-600 hover:text-indigo-900">Tambah Menu</a>
                             </th>
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
 
                             <!-- Kolom Aksi -->
                             <td class="px-4 py-10 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium flex gap-1">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
+                                <a href="{{url('/admin/editMenu')}}" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
                                 <form class="" action="#" method="post">
                                     @csrf
                                     @method('DELETE')
