@@ -108,7 +108,7 @@
 </head>
 <body>
   <div class="container">
-      <h2 class="text-gray-700 text-3xl font-medium font-bold">Tambah Menu</h2>
+      <h2 class="text-gray-700 text-3xl font-medium font-bold">Edit Menu</h2>
     {{-- <div class="header">
     </div> --}}
     <div class="table-container mt-8">
