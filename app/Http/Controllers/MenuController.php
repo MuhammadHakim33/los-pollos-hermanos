@@ -76,17 +76,34 @@ class MenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Menu $menu)
     {
-        return view('admin.editMenu');
+        return view('admin.editMenu', ['menu' => $menu]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Menu $menu, Request $request)
     {
-        //
+        if ($request->hasFile('gambar')) {
+            $fileName = time() . '.' . $request->gambar->extension();
+            $request->gambar->move(public_path('uploads'), $fileName);
+        } 
+        else {
+            $fileName = $menu->path_img;
+        }
+
+        $menu->update([
+            'path_img' => $fileName,
+            'name' => $request->nama_menu,
+            'desc' => $request->deskripsi,
+            'price' => $request->harga,
+            'status' => $request->status,
+            'category' => $request->category,
+        ]);
+
+        return redirect()->route('admin.menu');
     }
 
     /**

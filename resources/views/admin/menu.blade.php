@@ -36,7 +36,7 @@
 
                             <!-- Kolom Aksi -->
                             <td class="px-4 py-10 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium flex gap-1">
-                                <a href="{{url('/admin/editMenu')}}" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
+                                <a href="/admin/editMenu/{{ $item->id }}" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
                                 <form class="" action="#" method="post">
                                     @csrf
                                     @method('DELETE')
@@ -69,7 +69,7 @@
 
                             <!-- Kolom Edit -->
                             <td class="px-4 py-10 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium flex gap-1">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
+                                <a href="/admin/editMenu/{{ $item->id }}" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
                                 <form class="" action="#" method="post">
                                     @csrf
                                     @method('DELETE')

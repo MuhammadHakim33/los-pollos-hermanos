@@ -59,7 +59,8 @@ Route::middleware(Admin::class)->group(function () {
     Route::get('/admin/menu', [MenuController::class, 'index'])->name('admin.menu');
     Route::get('/admin/addMenu', [MenuController::class, 'create'])->name('admin.addMenu');
     Route::post('/admin/addMenu', [MenuController::class, 'store']);
-    Route::get('/admin/editMenu', [MenuController::class, 'edit'])->name('admin.editMenu');
+    Route::get('/admin/editMenu/{menu}', [MenuController::class, 'edit'])->name('admin.editMenu');
+    Route::put('/admin/editMenu/{menu}', [MenuController::class, 'update']);
     Route::delete('/admin/menu', [MenuController::class, 'destroy']);
     Route::get('/admin/pesanan', [AdminController::class, 'ManajemenPesanan'])->name('admin.pesanan');
     Route::put('/admin/pesanan/update/{order}', [AdminController::class, 'changeStatus']);
