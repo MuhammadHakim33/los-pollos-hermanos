@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Menu;
+use App\Models\User;
+use App\Models\Order;
+use Illuminate\Support\Facades\Hash;
+
 // use Illuminate\Support\Facades\Session;
 
 // class AdminController extends Controller
@@ -61,7 +66,29 @@ class AdminController extends Controller
 
     public function showRegistrationFormAdmin()
     {
-        return view('admin.signup');
+        return view('admin.register');
+    }
+
+    public function register(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'email_regis' => 'required|email',
+            'password_regis' => 'required|min:6',
+            'no_telp' => 'required',
+            'nama' => 'required',
+        ]);
+
+        $user = new User;
+        $user->email = $request->input('email_regis');
+        $user->password = bcrypt($request->input('password_regis'));
+        $user->phone = $request->input('no_telp');
+        $user->name = $request->input('nama');
+        $user->role = 'admin';
+        $user->save();
+
+        // Jika gagal, kembali ke halaman login dengan error
+        return redirect()->route('showLoginFormAdmin');
     }
 
     public function AdminDashboard()
@@ -69,24 +96,27 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function ManajemenMenu(){
-        return view('admin.menu');
-    }
-
-    public function ManajemenPesanan(){
-        return view('admin.pesanan');
-    }
-
-    public function ManajemenPengguna(){
-        return view('admin.pengguna');
-    }
-
-    public function Informasi(){
-        return view('admin.info');
-    }
-
-    public function logout()
+    public function ManajemenPesanan()
     {
+        $orders = Order::with('user', 'delivery')->get();
+        return view('admin.pesanan', ['orders' => $orders]);
+    }
+
+    public function changeStatus(Order $order, Request $request)
+    {
+        $order->delivery->status = $request->status;
+        $order->push();
+        return redirect()->back();
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
         return redirect()->route('loginAdmin');
     }
 }
