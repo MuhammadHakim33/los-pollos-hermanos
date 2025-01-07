@@ -12,7 +12,7 @@
             <div class=" inline-flex items-center px-3 py-2 border border-indigo-600 text-sm leading-4 font-bold rounded-md text-white dark:text-gray-400 bg-indigo-600 dark:bg-gray-800 focus:outline-none">
                 <span>{{ Auth::user()->name }}</span>
             </div>
-   `     </div>
+        </div>
 
     </div>
 </header>

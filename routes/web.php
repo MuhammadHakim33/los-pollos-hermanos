@@ -57,7 +57,8 @@ Route::middleware(Admin::class)->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
     Route::get('/admin/menu', [AdminController::class, 'ManajemenMenu'])->name('admin.menu');
     Route::delete('/admin/menu', [AdminController::class, 'HapusMenu']);
-    Route::get('/admin/pesanan', [AdminController::class, 'AdminDashboard'])->name('admin.pesanan');
+    Route::get('/admin/pesanan', [AdminController::class, 'ManajemenPesanan'])->name('admin.pesanan');
+    Route::put('/admin/pesanan/update/{order}', [AdminController::class, 'changeStatus']);
 });
 
 

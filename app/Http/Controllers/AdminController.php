@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Menu;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 
 // use Illuminate\Support\Facades\Session;
@@ -108,6 +109,19 @@ class AdminController extends Controller
             'foods' => $foods,
             'drinks' => $drinks,
         ]);
+    }
+
+    public function ManajemenPesanan()
+    {
+        $orders = Order::with('user', 'delivery')->get();
+        return view('admin.pesanan', ['orders' => $orders]);
+    }
+
+    public function changeStatus(Order $order, Request $request)
+    {
+        $order->delivery->status = $request->status;
+        $order->push();
+        return redirect()->back();
     }
 
     public function HapusMenu(Request $request)
