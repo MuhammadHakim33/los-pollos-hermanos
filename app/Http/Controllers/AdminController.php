@@ -96,31 +96,6 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function ManajemenMenu()
-    {
-        $foods = Menu::where('status', 'available')
-            ->where('category', 'food')
-            ->get();
-        $drinks = Menu::where('status', 'available')
-            ->where('category', 'drink')
-            ->get();
-
-        return view('admin.menu', [
-            'foods' => $foods,
-            'drinks' => $drinks,
-        ]);
-    }
-
-    public function TambahMenu()
-    {
-        return view('admin.addMenu');
-    }
-    
-    public function EditMenu()
-    {
-        return view('admin.editMenu');
-    }
-
     public function ManajemenPesanan()
     {
         $orders = Order::with('user', 'delivery')->get();
@@ -131,14 +106,6 @@ class AdminController extends Controller
     {
         $order->delivery->status = $request->status;
         $order->push();
-        return redirect()->back();
-    }
-
-    public function HapusMenu(Request $request)
-    {
-        $id = $request->id;
-        $menu = Menu::find($id);
-        $menu->delete();
         return redirect()->back();
     }
 

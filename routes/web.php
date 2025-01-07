@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -55,10 +56,10 @@ Route::middleware(Admin::class)->group(function () {
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
-    Route::get('/admin/menu', [AdminController::class, 'ManajemenMenu'])->name('admin.menu');
-    Route::get('/admin/addMenu', [AdminController::class, 'TambahMenu'])->name('admin.addMenu');
-    Route::get('/admin/editMenu', [AdminController::class, 'EditMenu'])->name('admin.editMenu');
-    Route::delete('/admin/menu', [AdminController::class, 'HapusMenu']);
+    Route::get('/admin/menu', [MenuController::class, 'index'])->name('admin.menu');
+    Route::get('/admin/addMenu', [MenuController::class, 'create'])->name('admin.addMenu');
+    Route::get('/admin/editMenu', [MenuController::class, 'edit'])->name('admin.editMenu');
+    Route::delete('/admin/menu', [MenuController::class, 'destroy']);
     Route::get('/admin/pesanan', [AdminController::class, 'ManajemenPesanan'])->name('admin.pesanan');
     Route::put('/admin/pesanan/update/{order}', [AdminController::class, 'changeStatus']);
 });
