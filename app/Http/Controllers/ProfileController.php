@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ProfileController extends Controller
 {
@@ -16,8 +17,18 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $carts = [];
+        $total = 0;
+
+        if(auth()->user()) {
+            $carts = Cart::instance(auth()->user()->email)->content();
+            $total = Cart::priceTotal();
+        }
+
         return view('profile.edit', [
             'user' => $request->user(),
+            'carts' => $carts,
+            'total' => $total,
         ]);
     }
 
