@@ -12,7 +12,7 @@
                     <a href="/order/{{ $order->id }}">
                         <h3 class="font-bold capitalize">{{ $order->id }}</h3>
                     </a>
-                    <ul class="max-w-xs flex flex-col mt-4">
+                    <ul class="flex flex-col mt-4">
                         @foreach ($order->items as $item)
                         <li class="inline-flex items-center gap-x-2 p-2 text-sm border border-gray-200 text-gray-600 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg">
                             <span class="grow">{{ '('.$item->qty.') '.$item->menu->name }}</span> 
