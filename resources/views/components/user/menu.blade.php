@@ -4,7 +4,7 @@
     <input type="text" name="menu_name" value="{{ $item->name }}" readonly hidden>
     <input type="text" name="menu_price" value="{{ $item->price }}" readonly hidden>
     <button type="submit" class="bg-white p-3 rounded shadow flex gap-4 border border-transparent hover:border hover:border-blue-500 hover:bg-blue-50/20 relative min-h-[140px]">
-        <img class="w-28 aspect-square object-cover rounded" src="{{ $item->path_img }}"/>
+        <img class="w-28 aspect-square object-cover rounded" src="{{ asset('/uploads/'.$item->path_img) }}"/>
 
         <div class="text-left flex flex-col justify-between h-full">
             <h3 class="mt-2 font-bold capitalize">{{ $item->name }}</h3>
