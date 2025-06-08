@@ -1,11 +1,10 @@
 <x-user-layout>
-    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-auto mt-20">
+    <div class="w-full max-w-md mx-auto mt-20">
         <div class="flex items-center mb-6">
-            <img alt="Selera Panca Logo" class="h-16 rounded-xl" src="{{ asset('images/Logo RM. Selera Panca.png') }}" />
-            <span class="ml-2 text-xl font-bold">Rumah Makan Selera Panca</span>
+            <img alt="Los Pollos Hermanos Logo" class="size-28 rounded-xl" src="{{ asset('images/los_pollos_hermanos_2.png') }}"/>
         </div>
-        <h2 class="text-xl font-semibold mb-2">Masukkan Email</h2>
-        <p class="text-gray-600 mb-4">Buat masuk ke akunmu atau daftar kalau kamu baru.</p>
+        <h2 class="text-xl font-semibold mb-2">Masuk ke Akun Anda</h2>
+        <p class="text-gray-600 mb-6">Beli makanan favoritmu lebih hemat! Login untuk dapat banyak voucher & bonus.</p>
 
         <!-- Form -->
         <form method="POST" action="{{ route('login') }}">
@@ -13,8 +12,8 @@
 
             <!-- email -->
             <div class="relative mb-5">
-                <input type="email" name="email" id="email" class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2" placeholder="you@email.com">
-                <label for="email" class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent  origin-[0_0] text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-gray-500 dark:peer-focus:text-neutral-500 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500 dark:text-neutral-500">Email</label>
+                <label for="input-label" class="block font-medium text-sm mb-2">Email</label>
+                <input type="email" name="email" id="email" class="py-2.5 sm:py-3 px-4 block w-full border-gray-300 rounded-sm sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="email@google.com">
                 @error('email')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -22,27 +21,47 @@
 
             <!-- password -->
             <div class="relative mb-5">
-                <input type="password" name="password" id="password" class="peer p-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2" placeholder="********">
-                <label for="password" class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent  origin-[0_0] text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-gray-500 dark:peer-focus:text-neutral-500 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500 dark:text-neutral-500">Password</label>
-                @error('password')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
+                <label class="block font-medium text-sm mb-2">Password</label>
+                <div class="relative">
+                    <input id="hs-toggle-password" type="password" name="password" class="py-2.5 sm:py-3 ps-4 pe-10 block w-full border-gray-300 rounded-sm sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="">
+                    <button type="button" data-hs-toggle-password='{
+                        "target": "#hs-toggle-password"
+                        }' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-blue-600">
+                            <svg class="shrink-0 size-5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                                <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                                <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                                <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                                <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                            </svg>
+                    </button>
+                </div>
+               <div class="flex mt-1">
+                    @error('password')
+                        <p class="flex-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                    <p class="flex-1 text-sm text-right text-blue-600 font-medium">
+                        <a href="">Lupa password?</a>
+                    </p>
+               </div>
             </div>
 
             <!-- General Error -->
-            @if ($errors->has('email'))
-            <div class="text-red-500 text-sm mb-4">
-                Email atau password yang dimasukkan salah.
-            </div>
-            @endif
+            {{-- @if ($errors->has('email'))
+                <div class="text-red-500 text-sm mb-4">
+                    Email atau password yang dimasukkan salah.
+                </div>
+            @endif --}}
 
-            <!-- Submit Button -->
-            <button type="submit" class="w-full py-3 bg-green-400 text-white rounded-lg font-semibold hover:bg-green-500 transition-all duration-200">Lanjut</button>
+            <button type="submit" class="mt-6 w-full py-3 px-4 text-sm text-center font-medium rounded-sm border border-transparent bg-red-700 text-white hover:bg-red-800 focus:outline-hidden focus:bg-red-900 disabled:opacity-50 disabled:pointer-events-none">
+                Masuk
+            </button>
         </form>
 
         <!-- Footer -->
         <div class="flex justify-center items-center mt-6">
-            <a href="{{ route('register') }}" class="text-teal-500 text-sm font-medium hover:text-teal-700">Bikin Akun</a>
+            <a href="{{ route('register') }}" class="text-gray-500 text-sm">Belum punya akun? <span class="text-black font-medium hover:underline">Daftar sekarang</span></a>
         </div>
     </div>
 </x-user-layout>
