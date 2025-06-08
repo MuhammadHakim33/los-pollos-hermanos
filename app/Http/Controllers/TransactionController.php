@@ -19,11 +19,11 @@ class TransactionController extends Controller
     {
         $this->cart = Cart::instance(auth()->user()->email);
 
-        Config::$serverKey = config('midtrans.serverKey');
-        Config::$clientKey = config('midtrans.clientKey');
-        Config::$isProduction = config('midtrans.isProduction');
-        Config::$isSanitized = config('midtrans.isSanitized');
-        Config::$is3ds = config('midtrans.is3ds');
+        // Config::$serverKey = config('midtrans.serverKey');
+        // Config::$clientKey = config('midtrans.clientKey');
+        // Config::$isProduction = config('midtrans.isProduction');
+        // Config::$isSanitized = config('midtrans.isSanitized');
+        // Config::$is3ds = config('midtrans.is3ds');
     }
 
     public function create()
@@ -73,39 +73,39 @@ class TransactionController extends Controller
 
             // insert record item order
             $order->items()->createMany($items);
-            
+
             // insert record delivery
             $delivery = $order->delivery()->create(['status' => 'pending']);
 
             // insert record delivery address
             $delivery->address()->create($input);
 
-            $params = [
-                'transaction_details' => [
-                    'order_id' => $order->id,
-                    'gross_amount' => $total,
-                ],
-                'customer_details' => [
-                    'first_name' => auth()->user()->name,
-                    'email' => auth()->user()->email,
-                    'phone' => auth()->user()->phone,
-                ],
-            ];
+            // $params = [
+            //     'transaction_details' => [
+            //         'order_id' => $order->id,
+            //         'gross_amount' => $total,
+            //     ],
+            //     'customer_details' => [
+            //         'first_name' => auth()->user()->name,
+            //         'email' => auth()->user()->email,
+            //         'phone' => auth()->user()->phone,
+            //     ],
+            // ];
 
-            $snapToken = Snap::createTransaction($params);
+            // $snapToken = Snap::createTransaction($params);
             $order->snap_token = $snapToken->token;
             $order->save();
 
             DB::commit();
-        } 
+        }
         catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('failed', 'Gagal memesan, mohon ulangi kembali!');
             // throw $th;
         }
-        
+
         $this->cart->destroy();
-        
+
         return redirect('order/'.$order->id);
     }
 
@@ -123,7 +123,7 @@ class TransactionController extends Controller
                 ->orderBy('created_at', 'desc')->get();
         $carts = Cart::instance(auth()->user()->email)->content();
         $total = Cart::priceTotal();
-        
+
         return view('user.transaction.history',  [
             'orders' => $orders,
             'carts' => $carts,
