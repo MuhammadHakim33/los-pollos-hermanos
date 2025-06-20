@@ -1,53 +1,106 @@
 <x-user-layout>
-    <form action="/checkout" method="post" class="container mx-auto max-w-xl p-4 mt-8 space-y-6">
-        @csrf
-        <div class="bg-white p-6 rounded border">
-            <div class="flex content-center items-baseline gap-x-2 divide-x divide-gray-700 mb-4">
-                <h3 class="text-base font-bold mb-4">PENGIRIMAN</h3>
-                <p class="ps-2 opacity-80 text-sm uppercase">Penerima - {{ $user->name }}</p>
-            </div>
-            <div class="mb-4">
-                <label for="kecamatan" class="block text-sm mb-2">Kecamatan</label>
-                <input type="text" id="kecamatan" name="kecamatan" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-            </div>
-            <div class="mb-4">
-                <label for="kelurahan" class="block text-sm mb-2">Kelurahan</label>
-                <input type="text" id="kelurahan" name="kelurahan" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-            </div>
-            <div class="mb-4">
-                <label for="detail" class="block text-sm mb-2">Alamat Detail</label>
-                <input type="text" id="detail" name="detail" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-            </div>
-        </div>
-        <div class="bg-white gap-y-4 p-6 rounded border flex flex-col">
-            <h3 class="text-base font-bold">RINGKASAN PESANAN</h3>
-            <div class="space-y-4 grow">
-                @foreach ($carts as $menu)
-                <div class="flex items-center gap-x-4">
-                    <img class="w-14 h-14 rounded aspect-square object-cover" src="{{ $menu->model->path_img }}" />
-                    <div class="grow">
-                        <h3 class="text-lg font-medium">{{ $menu->name }}</h3>
-                        <p>({{ $menu->qty }}x) Rp{{ number_format($menu->price) }}</p>
+    <x-user.header-simple />
+
+    <div class="flex justify-between gap-6 container mx-auto mt-2 pt-10">
+        <form action="/checkout" method="post" class="flex-auto">
+            @csrf
+            <div class="bg-white p-6 rounded border mb-6">
+                <div class="flex content-center items-baseline gap-x-2 divide-x divide-gray-700 mb-4">
+                    <h3 class="text-xl font-semibold">Pengiriman</h3>
+                </div>
+                <div class="mb-4 space-y-0.5">
+                    <p class="font-medium text-base">Penerima</p>
+                    <p class="opacity-80 font-light text-base">{{ $user->name }}</p>
+                    <p class="opacity-80 font-light text-base">{{ $user->phone }}</p>
+                </div>
+                <hr class="mb-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label for="detail" class="mb-2 block font-medium text-sm">Alamat</label>
+                        <textarea id="detail" name="detail" rows="3" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"></textarea>
                     </div>
+                    <div class="">
+                        <label for="kecamatan" class="mb-2 block font-medium text-sm">Kecamatan</label>
+                        <input type="text" id="kecamatan" name="kecamatan" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                    </div>
+                    <div class="">
+                        <label for="kelurahan" class="mb-2 block font-medium text-sm">Kelurahan</label>
+                        <input type="text" id="kelurahan" name="kelurahan" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white gap-y-4 p-6 rounded border flex flex-col mb-6">
+                <h3 class="text-xl font-semibold">Pembayaran</h3>
+                <div class="grid sm:grid-cols-3 gap-2">
+                    <label for="gopay" class="flex p-3 w-full bg-white border border-gray-200 rounded focus:border-blue-500 focus:ring-blue-500 shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
+                        <span class="font-medium">Gopay</span>
+                        <input type="radio" name="payment" class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="gopay" value="gopay">
+                    </label>
+
+                    <label for="dana" class="flex p-3 w-full bg-white border border-gray-200 rounded focus:border-blue-500 focus:ring-blue-500 shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
+                        <span class="font-medium">Dana</span>
+                        <input type="radio" name="payment" class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="dana" value="dana" checked="">
+                    </label>
+
+                    <label for="bca" class="flex p-3 w-full bg-white border border-gray-200 rounded focus:border-blue-500 focus:ring-blue-500 shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
+                        <span class="font-medium">BCA</span>
+                        <input type="radio" name="payment" class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="bca" value="bca" checked="">
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="py-3 px-4 text-sm font-medium rounded border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                Pesan
+            </button>
+        </form>
+
+        <div class="flex-1 bg-white gap-y-5 p-6 rounded border flex flex-col h-fit">
+            <h3 class="text-xl font-semibold">Detail Pesanan</h3>
+            <div class="space-y-3 grow">
+                @foreach ($carts as $menu)
+                <div class="">
+                    <h3 class="text-base font-medium">{{ $menu->name }}</h3>
+                    <p>Rp{{ number_format($menu->price) }} X {{ $menu->qty }}</p>
                 </div>
                 @endforeach
             </div>
             <hr>
-            <div class="space-y-1">
-                <div class="flex justify-between items-center text-base text-gray-500">
-                    <h5>Total Harga</h5>
-                    <p>Rp {{ number_format($total_price) }}</p>
+            <div class="">
+                <h3 class="text-xl font-semibold mb-4">Voucher</h3>
+                <form class="flex gap-x-2">
+                    <input placeholder="Kode" type="text" id="voucher" name="voucher" rows="3" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                    <button type="submit" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-hidden focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none">
+                        Pakai
+                    </button>
+                </form>
+            </div>
+            <hr>
+            <div>
+                <div class="space-y-2 mb-3">
+                    <div class="flex justify-between items-center text-base text-gray-500">
+                        <h5>Subtotal</h5>
+                        <p>Rp {{ number_format($total_price) }}</p>
+                    </div>
+                    <div class="flex justify-between items-center text-base text-gray-500">
+                        <h5>Pengiriman</h5>
+                        <p>Rp {{ number_format($total_price) }}</p>
+                    </div>
+                    <div class="flex justify-between items-center text-base text-gray-500">
+                        <h5>Diskon</h5>
+                        <p>Rp {{ number_format($total_price) }}</p>
+                    </div>
+                    <div class="flex justify-between items-center text-base text-gray-500">
+                        <h5>Pajak</h5>
+                        <p>Rp {{ number_format($total_price) }}</p>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center text-lg">
+                    <h3>Total Bayar</h3>
+                    <p class="font-semibold">Rp {{ number_format($total_pay) }}</p>
                 </div>
             </div>
-            <div class="flex justify-between items-center text-lg">
-                <h3>Total Bayar</h3>
-                <p class="font-semibold">Rp {{ number_format($total_pay) }}</p>
-            </div>
-            <button type="submit" class="py-3 px-4 text-sm font-medium rounded border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                Pesan & Bayar
-            </button>
         </div>
-    </form>
+    </div>
+
 
     <!-- TOAST -->
     @if(session('failed'))
