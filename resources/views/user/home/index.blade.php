@@ -34,9 +34,17 @@
             @foreach($category as $key => $item)
             <div id="{{ $item }}" @class(['hidden' => $key==0 ? false : true]) role="tabpanel" aria-labelledby="{{ $item }}-item">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach($menus->where('category', $item) as $menu)
-                    <x-user.menu :$menu />
-                @endforeach
+                @php
+                    $filteredMenus = $menus->where('category', $item);
+                @endphp
+
+                @if($filteredMenus->isEmpty())
+                    <p class="col-span-full mx-auto">Kosong</p>
+                @else
+                    @foreach($filteredMenus as $menu)
+                        <x-user.menu :menu="$menu" />
+                    @endforeach
+                @endif
                 </div>
             </div>
             @endforeach
