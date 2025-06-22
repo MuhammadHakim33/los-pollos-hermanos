@@ -99,7 +99,7 @@ class TransactionController extends Controller
             $order->items()->createMany($items);
 
             // insert record delivery
-            $delivery = $order->delivery()->create(['status' => 'pending']);
+            $delivery = $order->delivery()->create(['status' => 'process']);
 
             // insert record delivery address
             $delivery->address()->create([
@@ -145,6 +145,8 @@ class TransactionController extends Controller
     public function show(Order $order)
     {
         Gate::authorize('order-user', $order);
+
+        // dd($order->user->name);
 
         return view('user.transaction.detail', ['order' => $order ]);
     }

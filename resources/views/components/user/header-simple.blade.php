@@ -1,9 +1,9 @@
-<header class="bg-white sticky top-0 inset-x-0 border-b shadow-sm z-10">
+<header class="bg-white sticky top-0 inset-x-0 border-b shadow-sm z-20">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
         <div class="flex items-center">
             <img alt="Selera Panca Logo" class="h-14 rounded-xl" src="{{ asset('images/los_pollos_hermanos_2.png') }}" />
             <div class="flex items-center gap-x-4 ml-10">
-                <p class="font-medium">Checkout</p>
+                <p class="font-medium">{{ $title }}</p>
             </div>
         </div>
         <div class="flex items-center gap-x-4">

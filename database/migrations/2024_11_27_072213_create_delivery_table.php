@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignIdFor(Order::class);
-            $table->enum('status', ['pending', 'process', 'shipped', 'delivered', 'completed', 'failed'])->default('process');
+            $table->enum('status', ['process', 'delivered', 'completed', 'failed'])->default('process');
             $table->timestamps();
         });
 

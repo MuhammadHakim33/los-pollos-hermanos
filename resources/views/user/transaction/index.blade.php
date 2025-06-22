@@ -1,5 +1,5 @@
 <x-user-layout>
-    <x-user.header-simple />
+    <x-user.header-simple :title="'Checkout'" />
 
     <div class="flex justify-between gap-6 container mx-auto mt-2 pt-10">
         <form action="/checkout" method="post" class="flex-auto">
