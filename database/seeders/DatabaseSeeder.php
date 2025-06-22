@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             MenuTableSeeder::class,
-            OrderSeeder::class,
-            DeliverySeeder::class,
+            // OrderSeeder::class,
+            // DeliverySeeder::class,
         ]);
     }
 }

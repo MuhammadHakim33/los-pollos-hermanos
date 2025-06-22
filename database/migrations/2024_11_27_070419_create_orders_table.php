@@ -16,9 +16,12 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->char('id', 255)->primary();
             $table->foreignId('user_id')->constrained('users');
-            $table->integer('total');
+            $table->integer('subtotal');
+            $table->integer('harga_pengiriman');
+            $table->integer('diskon');
+            // $table->integer('total');
             $table->enum('status', ['failed', 'pending', 'success'])->default('pending');
-            $table->char('snap_token')->nullable();
+            // $table->char('snap_token')->nullable();
             $table->timestamps();
         });
 

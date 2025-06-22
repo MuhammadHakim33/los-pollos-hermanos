@@ -15,13 +15,14 @@ return new class extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignIdFor(Order::class);
-            $table->enum('status', ['pending', 'process', 'shipped', 'delivered', 'failed'])->default('pending');
+            $table->enum('status', ['pending', 'process', 'shipped', 'delivered', 'completed', 'failed'])->default('process');
             $table->timestamps();
         });
 
         Schema::create('delivery_address', function (Blueprint $table) {
             $table->id();
             $table->foreignUlid('delivery_id')->constrained('deliveries');
+            $table->string('kota', 255)->nullable();
             $table->string('kecamatan', 255)->nullable();
             $table->string('kelurahan', 255)->nullable();
             $table->text('detail')->nullable();

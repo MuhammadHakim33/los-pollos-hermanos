@@ -78,24 +78,24 @@
                 <div class="space-y-2 mb-3">
                     <div class="flex justify-between items-center text-base text-gray-500">
                         <h5>Subtotal</h5>
-                        <p>Rp {{ number_format($total_price) }}</p>
+                        <p>Rp {{ number_format($subtotal) }}</p>
                     </div>
                     <div class="flex justify-between items-center text-base text-gray-500">
                         <h5>Pengiriman</h5>
-                        <p>Rp {{ number_format($total_price) }}</p>
+                        <p>Rp {{ number_format($harga_pengiriman) }}</p>
                     </div>
                     <div class="flex justify-between items-center text-base text-gray-500">
                         <h5>Diskon</h5>
-                        <p>Rp {{ number_format($total_price) }}</p>
+                        <p>Rp {{ number_format($diskon) }}</p>
                     </div>
                     <div class="flex justify-between items-center text-base text-gray-500">
                         <h5>Pajak</h5>
-                        <p>Rp {{ number_format($total_price) }}</p>
+                        <p>Rp {{ number_format($pajak) }}</p>
                     </div>
                 </div>
                 <div class="flex justify-between items-center text-lg">
                     <h3>Total Bayar</h3>
-                    <p class="font-semibold">Rp {{ number_format($total_pay) }}</p>
+                    <p class="font-semibold">Rp {{ number_format($total) }}</p>
                 </div>
             </div>
         </div>

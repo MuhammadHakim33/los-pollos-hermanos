@@ -30,27 +30,34 @@ class TransactionController extends Controller
     {
         $user = auth()->user();
         $carts = $this->cart->content();
-        $total_price = $this->cart->priceTotal();
-        $total_pay = $this->cart->total();
+        $subtotal = $this->cart->priceTotal();
+        $harga_pengiriman = 10000;
+        $diskon = 0;
+        $pajak = 1000;
+        $total = $subtotal + $harga_pengiriman + $diskon + $pajak;
 
         return view('user.transaction.index', [
             'user' => $user,
             'carts' => $carts,
-            'total_price' => $total_price,
-            'total_pay' => $total_pay,
+            'subtotal' => $subtotal,
+            'harga_pengiriman' => $harga_pengiriman,
+            'diskon' => $diskon,
+            'pajak' => $pajak,
+            'total' => $pajak,
         ]);
     }
 
     public function store(Request $request)
     {
         $input = $request->validate([
+            'kota' => 'required',
             'kecamatan' => 'required',
             'kelurahan' => 'required',
             'detail' => 'required',
         ]);
 
         $carts = $this->cart->content();
-        $total = (int)$this->cart->total();
+        $subtotal = (int)$this->cart->total();
 
         $items = [];
         foreach($carts as $cart) {
@@ -67,7 +74,9 @@ class TransactionController extends Controller
             // insert record order
             $order = Order::create([
                 'user_id' => auth()->user()->id,
-                'total' => $total,
+                'subtotal' => $subtotal,
+                'harga_pengiriman' => 10000,
+                'pajak' => 1000,
                 'status' => 'pending'
             ]);
 
@@ -93,8 +102,8 @@ class TransactionController extends Controller
             // ];
 
             // $snapToken = Snap::createTransaction($params);
-            $order->snap_token = $snapToken->token;
-            $order->save();
+            // $order->snap_token = $snapToken->token;
+            // $order->save();
 
             DB::commit();
         }
