@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('subtotal');
             $table->integer('harga_pengiriman');
             $table->integer('diskon');
+            $table->integer('pajak');
+            $table->string('payment', 50);
             // $table->integer('total');
             $table->enum('status', ['failed', 'pending', 'success'])->default('pending');
             // $table->char('snap_token')->nullable();

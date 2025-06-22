@@ -41,9 +41,9 @@
                     @error('password')
                         <p class="flex-1 text-sm text-red-500">{{ $message }}</p>
                     @enderror
-                    <p class="flex-1 text-sm text-right text-blue-600 font-medium">
+                    <!-- <p class="flex-1 text-sm text-right text-blue-600 font-medium">
                         <a href="">Lupa password?</a>
-                    </p>
+                    </p> -->
                </div>
             </div>
 

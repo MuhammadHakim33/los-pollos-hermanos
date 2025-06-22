@@ -1,5 +1,5 @@
 <x-user-layout>
-    <x-user.header :$carts :$total />
+    <x-user.header :$carts :$subtotal />
 
     <section class="py-8 rounded">
         <div class="container mx-auto px-4">
@@ -23,51 +23,23 @@
 
     <main class="container mx-auto px-4 mt-8 space-y-6">
         <nav class="relative z-0 flex border border-gray-200 rounded overflow-hidden" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
-            <button type="button" class="hs-tab-active:border-b-red-600 hs-tab-active:text-gray-900 relative min-w-0 flex-1 bg-white first:border-s-0 border-s border-b-2 border-gray-200 py-4 px-4 text-gray-500 hover:text-gray-700 text-sm font-medium text-center overflow-hidden hover:bg-gray-50 focus:z-10 focus:outline-hidden focus:text-red-600 disabled:opacity-50 disabled:pointer-events-none active" id="hemat-item" aria-selected="true" data-hs-tab="#hemat" aria-controls="hemat" role="tab">
-                Hemat
+            @foreach($category as $key => $item)
+            <button type="button" @class(['hs-tab-active:border-b-red-600 hs-tab-active:text-gray-900 relative min-w-0 flex-1 bg-white first:border-s-0 border-s border-b-2 border-gray-200 py-4 px-4 text-gray-500 hover:text-gray-700 text-sm font-medium text-center overflow-hidden hover:bg-gray-50 focus:z-10 focus:outline-hidden focus:text-red-600 disabled:opacity-50 disabled:pointer-events-none capitalize', 'active' => $key==0 ? true : false]) id="{{ $item }}-item" aria-selected="@if($key==0) true @else false @endif" data-hs-tab="#{{ $item }}" aria-controls="{{ $item }}" role="tab">
+                {{ $item }}
             </button>
-            <button type="button" class="hs-tab-active:border-b-red-600 hs-tab-active:text-gray-900 relative min-w-0 flex-1 bg-white first:border-s-0 border-s border-b-2 border-gray-200 py-4 px-4 text-gray-500 hover:text-gray-700 text-sm font-medium text-center overflow-hidden hover:bg-gray-50 focus:z-10 focus:outline-hidden focus:text-red-600 disabled:opacity-50 disabled:pointer-events-none" id="kombo-item" aria-selected="false" data-hs-tab="#kombo" aria-controls="kombo" role="tab">
-                Kombo
-            </button>
-            <button type="button" class="hs-tab-active:border-b-red-600 hs-tab-active:text-gray-900 relative min-w-0 flex-1 bg-white first:border-s-0 border-s border-b-2 border-gray-200 py-4 px-4 text-gray-500 hover:text-gray-700 text-sm font-medium text-center overflow-hidden hover:bg-gray-50 focus:z-10 focus:outline-hidden focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none" id="ayam-item" aria-selected="false" data-hs-tab="#ayam" aria-controls="ayam" role="tab">
-                Ayam
-            </button>
+            @endforeach
         </nav>
 
         <div class="mt-3">
-            <div id="hemat" role="tabpanel" aria-labelledby="hemat-item">
-                <p class="text-gray-500">
-                This is the <em class="font-semibold text-gray-800">first</em> item's tab body.
-                </p>
+            @foreach($category as $key => $item)
+            <div id="{{ $item }}" @class(['hidden' => $key==0 ? false : true]) role="tabpanel" aria-labelledby="{{ $item }}-item">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                @foreach($menus->where('category', $item) as $menu)
+                    <x-user.menu :$menu />
+                @endforeach
+                </div>
             </div>
-            <div id="kombo" class="hidden" role="tabpanel" aria-labelledby="kombo-item">
-                <p class="text-gray-500">
-                This is the <em class="font-semibold text-gray-800">second</em> item's tab body.
-                </p>
-            </div>
-            <div id="ayam" class="hidden" role="tabpanel" aria-labelledby="ayam-item">
-                <p class="text-gray-500">
-                This is the <em class="font-semibold text-gray-800">third</em> item's tab body.
-                </p>
-            </div>
-        </div>
-
-        <!-- @if(isset($foods))
-        <h2 class="text-xl font-bold mb-4">ANEKA MAKANAN</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            @foreach($foods as $item)
-                <x-user.menu :$item />
             @endforeach
         </div>
-        @endif
-
-        @if(isset($drinks))
-        <h2 class="text-xl font-bold mb-4">ANEKA MINUMAN</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            @foreach($drinks as $item)
-                <x-user.menu :$item />
-            @endforeach
-        </div>
-        @endif -->
     </main>
 </x-user-layout>

@@ -26,7 +26,7 @@ class TransactionController extends Controller
         // Config::$is3ds = config('midtrans.is3ds');
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $user = auth()->user();
         $carts = $this->cart->content();
@@ -34,7 +34,12 @@ class TransactionController extends Controller
         $harga_pengiriman = 10000;
         $diskon = 0;
         $pajak = 1000;
-        $total = $subtotal + $harga_pengiriman + $diskon + $pajak;
+
+        if ($request->query('voucher') && preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6}$/', $request->query('voucher'))) {
+            $diskon = 10000;
+        }
+
+        $total = ($subtotal + $harga_pengiriman + $pajak) - $diskon;
 
         return view('user.transaction.index', [
             'user' => $user,
@@ -43,7 +48,7 @@ class TransactionController extends Controller
             'harga_pengiriman' => $harga_pengiriman,
             'diskon' => $diskon,
             'pajak' => $pajak,
-            'total' => $pajak,
+            'total' => $total,
         ]);
     }
 
@@ -54,10 +59,18 @@ class TransactionController extends Controller
             'kecamatan' => 'required',
             'kelurahan' => 'required',
             'detail' => 'required',
+            'payment' => 'required',
         ]);
 
         $carts = $this->cart->content();
         $subtotal = (int)$this->cart->total();
+        $harga_pengiriman = 10000;
+        $diskon = 0;
+        $pajak = 1000;
+
+        if ($request->has('voucher')) {
+            $diskon = 10000;
+        }
 
         $items = [];
         foreach($carts as $cart) {
@@ -75,9 +88,11 @@ class TransactionController extends Controller
             $order = Order::create([
                 'user_id' => auth()->user()->id,
                 'subtotal' => $subtotal,
-                'harga_pengiriman' => 10000,
-                'pajak' => 1000,
-                'status' => 'pending'
+                'harga_pengiriman' => $harga_pengiriman,
+                'diskon' => $diskon,
+                'pajak' => $pajak,
+                'status' => 'pending',
+                'payment' => $request->payment
             ]);
 
             // insert record item order
@@ -87,7 +102,16 @@ class TransactionController extends Controller
             $delivery = $order->delivery()->create(['status' => 'pending']);
 
             // insert record delivery address
-            $delivery->address()->create($input);
+            $delivery->address()->create([
+                'kota' => $request->kota,
+                'kecamatan' => $request->kecamatan,
+                'kelurahan' => $request->kelurahan,
+                'detail' => $request->detail,
+            ]);
+
+            // dump($order);
+            // dump($delivery);
+            // die;
 
             // $params = [
             //     'transaction_details' => [

@@ -11,11 +11,7 @@ class Order extends Model
 {
     public $incrementing = false;
 
-    protected $fillable = [
-        'user_id',
-        'total',
-        'status'
-    ];
+    protected $guarded = [];
 
     public function delivery()
     {

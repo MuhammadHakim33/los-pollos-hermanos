@@ -15,9 +15,16 @@
                 </div>
                 <hr class="mb-4">
                 <div class="grid grid-cols-2 gap-4">
+                    @if($diskon!=0)
+                    <input type="text" id="voucher" name="voucher" value="{{ $diskon }}" hidden>
+                    @endif
                     <div class="col-span-2">
                         <label for="detail" class="mb-2 block font-medium text-sm">Alamat</label>
                         <textarea id="detail" name="detail" rows="3" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"></textarea>
+                    </div>
+                    <div class="">
+                        <label for="kota" class="mb-2 block font-medium text-sm">Kota</label>
+                        <input type="text" id="kota" name="kota" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
                     </div>
                     <div class="">
                         <label for="kecamatan" class="mb-2 block font-medium text-sm">Kecamatan</label>
@@ -34,21 +41,21 @@
                 <div class="grid sm:grid-cols-3 gap-2">
                     <label for="gopay" class="flex p-3 w-full bg-white border border-gray-200 rounded focus:border-blue-500 focus:ring-blue-500 shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
                         <span class="font-medium">Gopay</span>
-                        <input type="radio" name="payment" class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="gopay" value="gopay">
+                        <input type="radio" name="payment" class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="gopay" value="gopay" checked="true">
                     </label>
 
                     <label for="dana" class="flex p-3 w-full bg-white border border-gray-200 rounded focus:border-blue-500 focus:ring-blue-500 shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
                         <span class="font-medium">Dana</span>
-                        <input type="radio" name="payment" class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="dana" value="dana" checked="">
+                        <input type="radio" name="payment" class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="dana" value="dana" checked="false">
                     </label>
 
                     <label for="bca" class="flex p-3 w-full bg-white border border-gray-200 rounded focus:border-blue-500 focus:ring-blue-500 shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
                         <span class="font-medium">BCA</span>
-                        <input type="radio" name="payment" class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="bca" value="bca" checked="">
+                        <input type="radio" name="payment" class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none" id="bca" value="bca" checked="false">
                     </label>
                 </div>
             </div>
-            <button type="submit" class="py-3 px-4 text-sm font-medium rounded border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            <button type="submit" class="py-3 px-4 text-sm font-medium rounded border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
                 Pesan
             </button>
         </form>
@@ -66,7 +73,7 @@
             <hr>
             <div class="">
                 <h3 class="text-xl font-semibold mb-4">Voucher</h3>
-                <form class="flex gap-x-2">
+                <form class="flex gap-x-2" action="/checkout" method="get">
                     <input placeholder="Kode" type="text" id="voucher" name="voucher" rows="3" class="py-3 px-4 block w-full border-gray-200 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
                     <button type="submit" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-hidden focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none">
                         Pakai

@@ -12,25 +12,29 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        $foods = Menu::where('status', 'available')
-                    ->where('category', 'food')
-                    ->get();
-        $drinks = Menu::where('status', 'available')
-                    ->where('category', 'drink')
-                    ->get();
+        // $foods = Menu::where('status', 'available')
+        //             ->where('category', 'food')
+        //             ->get();
+        // $drinks = Menu::where('status', 'available')
+        //             ->where('category', 'drink')
+        //             ->get();
+        $menus = Menu::where('status', 'available')->get();
         $carts = [];
-        $total = 0;
+        $subtotal = 0;
+        $category = ['hemat', 'kombo', 'ayam', 'burger', 'cemilan', 'ala-carte', 'minuman', 'es-krim'];
 
         if(auth()->user()) {
             $carts = Cart::instance(auth()->user()->email)->content();
-            $total = Cart::priceTotal();
+            $subtotal = Cart::priceTotal();
         }
 
         return view('user.home.index', [
-            'foods' => $foods,
-            'drinks' => $drinks,
+            // 'foods' => $foods,
+            // 'drinks' => $drinks,
             'carts' => $carts,
-            'total' => $total,
+            'subtotal' => $subtotal,
+            'category' => $category,
+            'menus' => $menus,
         ]);
     }
 
