@@ -21,7 +21,7 @@ class HomeController extends Controller
         $menus = Menu::where('status', 'available')->get();
         $carts = [];
         $subtotal = 0;
-        $category = ['hemat', 'kombo', 'ayam', 'burger', 'cemilan', 'ala-carte', 'minuman', 'es-krim'];
+        $category = ['hemat', 'kombo', 'ayam', 'burger', 'camilan', 'minuman', 'eskrim'];
 
         if(auth()->user()) {
             $carts = Cart::instance(auth()->user()->email)->content();
