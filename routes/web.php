@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{id}', [CartController::class, 'destroy']);
     Route::put('/cart/{id}/decrease', [CartController::class, 'decrease']);
     Route::put('/cart/{id}/increase', [CartController::class, 'increase']);
+    Route::put('/cart/{id}/update', [CartController::class, 'update']);
 
     Route::get('/checkout', [TransactionController::class, 'create'])->middleware(EnsureCartFilled::class);
     Route::post('/checkout', [TransactionController::class, 'store'])->middleware(EnsureCartFilled::class);

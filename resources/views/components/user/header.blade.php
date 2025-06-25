@@ -118,22 +118,44 @@ $isCartEmpty = count($carts) > 0 ? true : false;
                                     </button>
                                 </form>
                                 <!-- DECREASE -->
-                                <form action="/cart/{{ $item->rowId }}/decrease" method="post">
+                                <!-- <form action="/cart/{{ $item->rowId }}/decrease" method="post">
                                     @method('PUT')
                                     @csrf
                                     <input type="text" name="qty" value="{{ $item->qty }}" readonly hidden>
                                     <button type="submit" class="size-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" @disabled($item->qty == 1)>
                                         <i class="ri-subtract-fill ri-lg"></i>
                                     </button>
-                                </form>
+                                </form> -->
                                 <!-- QUANTITY -->
-                                <input class="p-0 w-4 bg-transparent border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" style="-moz-appearance: textfield;" type="number" value="{{ $item->qty }}">
+                                <!-- <input class="p-0 w-4 bg-transparent border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" style="-moz-appearance: textfield;" type="number" value="{{ $item->qty }}"> -->
                                 <!-- INCREASE -->
-                                <form action="/cart/{{ $item->rowId }}/increase" method="post">
+                                <!-- <form action="/cart/{{ $item->rowId }}/increase" method="post">
                                     @method('PUT')
                                     @csrf
                                     <input type="text" name="qty" value="{{ $item->qty }}" readonly hidden>
                                     <button type="submit" class="size-7 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                                        <i class="ri-add-fill ri-lg"></i>
+                                    </button>
+                                </form> -->
+                                <form action="/cart/{{ $item->rowId }}/update" method="post" class="flex items-center gap-x-1.5" id="form-update-qty">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <!-- Tombol MIN -->
+                                    <button type="button" class="qty-btn size-7 rounded border bg-white text-gray-800" onclick="adjustQty(this, -1)">
+                                        <i class="ri-subtract-fill ri-lg"></i>
+                                    </button>
+
+                                    <!-- Input Qty -->
+                                    <input
+                                        type="number"
+                                        name="qty"
+                                        min="1"
+                                        value="{{ $item->qty }}"
+                                        class="input-qty p-0 w-8 bg-transparent border rounded border-gray-200 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                                    >
+                                    <!-- Tombol PLUS -->
+                                    <button type="button" class="qty-btn size-7 rounded border bg-white text-gray-800" onclick="adjustQty(this, 1)">
                                         <i class="ri-add-fill ri-lg"></i>
                                     </button>
                                 </form>
@@ -166,3 +188,18 @@ $isCartEmpty = count($carts) > 0 ? true : false;
         </div>
     </div>
 </div>
+
+<script>
+function adjustQty(button, delta) {
+
+    const form = document.getElementById('form-update-qty');
+    const input = form.querySelector('.input-qty');
+
+    let qty = parseInt(input.value) || 1;
+    qty += delta;
+    if (qty < 1) qty = 1;
+
+    input.value = qty;
+    form.submit(); // langsung kirim form
+}
+</script>

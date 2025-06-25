@@ -20,8 +20,8 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $this->cart->add([
-            'id' => $request->menu_id, 
-            'name' => $request->menu_name, 
+            'id' => $request->menu_id,
+            'name' => $request->menu_name,
             'qty' => 1,
             'price' => $request->menu_price,
             'weight' => 0,
@@ -34,7 +34,7 @@ class CartController extends Controller
     {
         if ($request->qty > 1) {
             $this->cart->update($id, $request->qty - 1);
-        } 
+        }
         return back();
     }
 
@@ -47,6 +47,16 @@ class CartController extends Controller
     public function destroy(string $id)
     {
         $this->cart->remove($id);
+        return back();
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'qty' => 'required|integer|min:1'
+        ]);
+
+        $this->cart->update($id, $request->qty);
         return back();
     }
 }
